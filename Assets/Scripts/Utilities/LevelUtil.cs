@@ -11,28 +11,28 @@ public class LevelUtil
 
     private static List<Level> levels; //hold all levels data
     private static List<int> checkPoints; //hold all checkpoint
-
+        
     public static void Init()
     {
         //level 1
         List<string> answer = new List<string>(new[] { "a", "i", "u", "e", "o" });
         List<string> questions = new List<string>(new[] { "あ", "い", "う", "え", "お" });
-        Level level1 = new Level(0, "Level 1", questions, answer, 0, 100, 10, 4, 1);
+        Level level1 = new Level(0, "Level 1", questions, answer, 0, 100, 10, 4 , 2, false, false);
 
         //level 2
         answer = new List<string>(new[] { "ka", "ki", "ku", "ke", "ko" });
         questions = new List<string>(new[] { "か", "き", "く", "け", "こ" });
-        Level level2 = new Level(1, "Level 2", questions, answer, 100, 200, 10, 4, 1);
+        Level level2 = new Level(1, "Level 2", questions, answer, 100, 200, 10, 4, 1, true, false);
 
         //level 3
         answer = new List<string>(new[] { "a", "i", "u", "e", "o", "ka", "ki", "ku", "ke", "ko" });
         questions = new List<string>(new[] { "あ", "い", "う", "え", "お", "か", "き", "く", "け", "こ" });
-        Level level3 = new Level(2, "Level 3", questions, answer, 200, 500, 10, 4, 1);
+        Level level3 = new Level(2, "Level 3", questions, answer, 200, 500, 10, 4, 1, false, false);
 
         //level 4
         answer = new List<string>(new[] { "sa", "shi", "su", "se", "so" });
         questions = new List<string>(new[] { "さ", "し", "す", "せ", "そ" });
-        Level level4 = new Level(3, "Level 4", questions, answer, 500, 600, 10, 4, 1);
+        Level level4 = new Level(3, "Level 4", questions, answer, 500, 600, 10, 4, 1, false, false);
 
         //push all level to levels
         levels = new List<Level>(new Level[] { level1, level2, level3, level4 });

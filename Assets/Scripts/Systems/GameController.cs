@@ -11,11 +11,10 @@ public class GameController : MonoBehaviour
     public Vector3 spawnValue;
     public GameObject enemy;
 
-    public int enemyCount;
-    public float waveWait;
-    public float spawnWait;
-    public float firstWait;
     public Text scoreText;
+    public Text CurrentLevelText;
+    public Text NextLevelText;
+
     private int score;
 
     private bool gameOver;
@@ -27,6 +26,8 @@ public class GameController : MonoBehaviour
     public static int currentEnemyId;
 
     public static Level currentLevel;
+
+    private Level nextLevel;
 
     public static string GetQuestion(string answer)
     {
@@ -54,15 +55,16 @@ public class GameController : MonoBehaviour
         //init level data
         LevelUtil.Init();
         //load saved data
-        int savedScore = 100; //TODO: load current score in file
+        int savedScore = 80; //TODO: load current score in file
         int savedLevelIndex = 0; //TODO: load saved level index in file
 
         //load level from saved data
         currentLevel = LevelUtil.GetLevel(savedLevelIndex);
+        nextLevel = LevelUtil.GetLevel(savedLevelIndex + 1);
 
         //init ui
         score = savedScore;
-        UpdateScoreText();
+        UpdateScore();
 
         gameOver = false;
         restart = false;
@@ -88,17 +90,17 @@ public class GameController : MonoBehaviour
 
     IEnumerator SpawnWave()
     {
-        yield return new WaitForSeconds(firstWait);
+        yield return new WaitForSeconds(3);
         while (true)
         {
-            for (int i = 0; i < enemyCount; i++)
+            for (int i = 0; i < currentLevel.GetEnemyEachWaveCount(); i++)
             {
                 Vector3 spawnPosition = new Vector3(Random.Range(-spawnValue.x, spawnValue.x), spawnValue.y, spawnValue.z);
                 Quaternion spawnRotation = Quaternion.identity;
                 Instantiate(enemy, spawnPosition, spawnRotation);
-                yield return new WaitForSeconds(spawnWait);
+                yield return new WaitForSeconds(currentLevel.GetSpawnWait());
             }
-            yield return new WaitForSeconds(waveWait);
+            yield return new WaitForSeconds(currentLevel.GetSpawnWait());
             if (gameOver)
             {
                 restart = true;
@@ -111,7 +113,13 @@ public class GameController : MonoBehaviour
     public void AddScore(int scoreToAdd)
     {
         score += scoreToAdd;
-        UpdateScoreText();
+        UpdateScore();
+    }
+
+    public void MinusScore(int scoreToMinus)
+    {
+        score -= scoreToMinus;
+        UpdateScore();
     }
 
     public void GameOver()
@@ -120,14 +128,34 @@ public class GameController : MonoBehaviour
         gameOverText.text = "Game Over";
     }
 
+    private void UpdateScore()
+    {
+        UpdateScoreText();
+        if (score < currentLevel.GetDownPoint())
+        {
+            currentLevel = LevelUtil.DownLevel(currentLevel);
+        }
+        else if (score > currentLevel.GetUpPoint())
+        {
+            currentLevel = LevelUtil.UpLevel(currentLevel);
+        }
+        nextLevel = LevelUtil.GetLevel(currentLevel.GetIndex() + 1);
+        UpdateCurrentLevelText();
+        UpdateNextLevelText();
+    }
+
+    private void UpdateCurrentLevelText()
+    {
+        CurrentLevelText.text = currentLevel.GetName();
+    }
+
+    private void UpdateNextLevelText()
+    {
+        NextLevelText.text = "Next Level: " + (nextLevel.GetDownPoint() - score);
+    }
+
     private void UpdateScoreText()
     {
         scoreText.text = "Score: " + score;
-    }
-
-    public void MinusScore(int scoreToMinus)
-    {
-        score -= scoreToMinus;
-        UpdateScoreText();
     }
 }
