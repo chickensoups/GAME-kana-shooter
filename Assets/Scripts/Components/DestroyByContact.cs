@@ -34,15 +34,19 @@ public class DestroyByContact : MonoBehaviour
             {
                 string answer = other.gameObject.GetComponentInChildren<TextMesh>().text;
                 string question = gameObject.GetComponentInChildren<TextMesh>().text;
-                if (GameController.getQuestion(answer).Equals(question))
+                if (GameController.GetQuestion(answer).Equals(question))
                 {
                     gameController.AddScore(10);
                     Destroy(gameObject);
                     Instantiate(enemyExplosion, transform.position, transform.rotation);
                 }
+                else
+                {
+                    gameController.MinusScore(1);
+                    Instantiate(wrongBulletExplosion, transform.position, transform.rotation);
+                }
             }
             Destroy(other.gameObject);
-            Instantiate(wrongBulletExplosion, transform.position, transform.rotation);
         }
 
         if (other.tag == "Barrier")

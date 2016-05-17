@@ -13,8 +13,8 @@ public class EnemyController : MonoBehaviour
 	{
         //render text
         TextMesh label = gameObject.GetComponentInChildren<TextMesh>();
-	    labelIndex = Mathf.CeilToInt(Random.value*(GameController.questions.Length - 1));
-        label.text = GameController.questions[labelIndex];
+	    labelIndex = Mathf.CeilToInt(Random.value*(GameController.currentLevel.GetQuestions().Count - 1));
+        label.text = GameController.currentLevel.GetQuestions()[labelIndex];
         if (!WeaponController.hadTarget)
         {
             isTarget = true;

@@ -78,26 +78,29 @@ public class WeaponController : MonoBehaviour
             int questionPosition = newTarget.GetComponent<EnemyController>().labelIndex;
             string[] labels = new string[4];
             int trueIndex = Mathf.CeilToInt(Random.Range(0, 3)); //random index with true value
-            string trueText = GameController.answers[questionPosition];
+            string trueText = GameController.currentLevel.GetAnswers()[questionPosition];
             labels[trueIndex] = trueText;
 
             //select random three answer labels excluded true answer label
-            string[] answersWihtouTrueAnswer = GameController.answers.Clone() as string[];
-            List<string> answersWithoutTrueAnswerList = answersWihtouTrueAnswer.ToList();
-            answersWithoutTrueAnswerList.Remove(trueText);
-            for (int i = 0; i < answersWithoutTrueAnswerList.Count; i++)
+            string[] answersWithoutTrueAnswer = GameController.currentLevel.GetAnswers().ToArray().Clone() as string[];
+            if (answersWithoutTrueAnswer != null)
             {
-                string tmpAnswer = answersWithoutTrueAnswerList[i];
-                int j = Mathf.CeilToInt(Random.Range(0, answersWithoutTrueAnswerList.Count-1));
-                answersWithoutTrueAnswerList[i] = answersWithoutTrueAnswerList[j];
-                answersWithoutTrueAnswerList[j] = tmpAnswer;
-            }
-
-            for (int j = 0; j < labels.Length; j++)
-            {
-                if (labels[j] == null)
+                List<string> answersWithoutTrueAnswerList = answersWithoutTrueAnswer.ToList();
+                answersWithoutTrueAnswerList.Remove(trueText);
+                for (int i = 0; i < answersWithoutTrueAnswerList.Count; i++)
                 {
-                    labels[j] = answersWithoutTrueAnswerList[j];
+                    string tmpAnswer = answersWithoutTrueAnswerList[i];
+                    int j = Mathf.CeilToInt(Random.Range(0, answersWithoutTrueAnswerList.Count-1));
+                    answersWithoutTrueAnswerList[i] = answersWithoutTrueAnswerList[j];
+                    answersWithoutTrueAnswerList[j] = tmpAnswer;
+                }
+
+                for (int j = 0; j < labels.Length; j++)
+                {
+                    if (labels[j] == null)
+                    {
+                        labels[j] = answersWithoutTrueAnswerList[j];
+                    }
                 }
             }
 

@@ -24,43 +24,51 @@ public class GameController : MonoBehaviour
     public Text gameOverText;
     public Text restartText;
 
-    public static string[] questions;
-    public static string[] answers;
-
     public static int currentEnemyId;
 
-    public static string getQuestion(string answer)
+    public static Level currentLevel;
+
+    public static string GetQuestion(string answer)
     {
-        int index = Array.FindIndex(answers, item => item.Equals(answer));
+        int index = currentLevel.GetAnswers().IndexOf(answer);
         if (index != -1)
         {
-            return questions[index];
+            return currentLevel.GetQuestions()[index];
         }
         return "";
     }
 
-    public static string getAnswer(string question)
+    public static string GetAnswer(string question)
     {
-        return answers[Array.FindIndex(questions, item => item.Equals(question))];
+        int index = currentLevel.GetQuestions().IndexOf(question);
+        if (index != -1)
+        {
+            return currentLevel.GetAnswers()[index];
+        }
+        return "";
     }
 
     void Start()
     {
-        //init questions and answers
+
+        //init level data
+        LevelUtil.Init();
+        //load saved data
         int savedScore = 100; //TODO: load current score in file
-        if (savedScore < 1000)
-        {
-            questions = new [] { "あ", "い", "う", "え", "お", "か", "き", "く", "け", "こ" };
-            answers = new [] { "a", "i", "u", "e", "o", "ka", "ki", "ku", "ke", "ko" };
-        }
+        int savedLevelIndex = 0; //TODO: load saved level index in file
+
+        //load level from saved data
+        currentLevel = LevelUtil.GetLevel(savedLevelIndex);
 
         //init ui
-        score = 0;
+        score = savedScore;
+        UpdateScoreText();
+
         gameOver = false;
         restart = false;
         gameOverText.text = "";
         restartText.text = "";
-        UpdateScoreText();
+        //start spawn enemy
         StartCoroutine(SpawnWave());
     }
 
