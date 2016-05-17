@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class WeaponController : MonoBehaviour
 {
@@ -67,8 +69,6 @@ public class WeaponController : MonoBehaviour
 
         //Display change weapon sound
         GetComponent<AudioSource>().Play();
-        //show mesh renderer
-
     }
 
     private void ChangeWeaponLabel(GameObject newTarget)
@@ -80,15 +80,28 @@ public class WeaponController : MonoBehaviour
             int trueIndex = Mathf.CeilToInt(Random.Range(0, 3)); //random index with true value
             string trueText = GameController.answers[questionPosition];
             labels[trueIndex] = trueText;
+
+            //select random three answer labels excluded true answer label
+            string[] answersWihtouTrueAnswer = GameController.answers.Clone() as string[];
+            List<string> answersWithoutTrueAnswerList = answersWihtouTrueAnswer.ToList();
+            answersWithoutTrueAnswerList.Remove(trueText);
+            for (int i = 0; i < answersWithoutTrueAnswerList.Count; i++)
+            {
+                string tmpAnswer = answersWithoutTrueAnswerList[i];
+                int j = Mathf.CeilToInt(Random.Range(0, answersWithoutTrueAnswerList.Count-1));
+                answersWithoutTrueAnswerList[i] = answersWithoutTrueAnswerList[j];
+                answersWithoutTrueAnswerList[j] = tmpAnswer;
+            }
+
             for (int j = 0; j < labels.Length; j++)
             {
                 if (labels[j] == null)
                 {
-                    int position = Mathf.CeilToInt(Random.Range(0, Constants.ENG_CHARS.Length - 1));
-                    labels[j] = GameController.answers[position];
+                    labels[j] = answersWithoutTrueAnswerList[j];
                 }
             }
 
+            //change weapons label
             weapon1.GetComponentInChildren<TextMesh>().text = labels[0];
             weapon2.GetComponentInChildren<TextMesh>().text = labels[1];
             weapon3.GetComponentInChildren<TextMesh>().text = labels[2];
