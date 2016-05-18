@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
+using System.Timers;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -11,22 +11,27 @@ public class GameController : MonoBehaviour
     public Vector3 spawnValue;
     public GameObject enemy;
 
-    public Text scoreText;
-    public Text CurrentLevelText;
-    public Text NextLevelText;
-
     private int score;
+    public Text scoreText;
+
+    public Text currentLevelText;
+    public Text nextLevelText;
+
+    private float newWaveCooldown;
+    private float newWaveCooldownRate;
+    private float nextNewWaveUpdateTime;
+    public Text newWaveIsCommingText;
+    public Text newWaveCooldownText;
 
     private bool gameOver;
-    private bool restart;
-
     public Text gameOverText;
+
+    private bool restart;
     public Text restartText;
 
     public static int currentEnemyId;
 
     public static Level currentLevel;
-
     private Level nextLevel;
 
     public static string GetQuestion(string answer)
@@ -55,7 +60,7 @@ public class GameController : MonoBehaviour
         //init level data
         LevelUtil.Init();
         //load saved data
-        int savedScore = 80; //TODO: load current score in file
+        int savedScore = 50; //TODO: load current score in file
         int savedLevelIndex = 0; //TODO: load saved level index in file
 
         //load level from saved data
@@ -66,9 +71,16 @@ public class GameController : MonoBehaviour
         score = savedScore;
         UpdateScore();
 
+        newWaveCooldown = 0;
+        newWaveCooldownRate = 0.1f;
+        nextNewWaveUpdateTime = Time.time;
+        newWaveCooldownText.text = "";
+        newWaveIsCommingText.text = ""; 
+
         gameOver = false;
-        restart = false;
         gameOverText.text = "";
+
+        restart = false;
         restartText.text = "";
         //start spawn enemy
         StartCoroutine(SpawnWave());
@@ -86,6 +98,30 @@ public class GameController : MonoBehaviour
                 SceneManager.LoadScene("Main");
             }
         }
+
+        if (newWaveCooldown > 0)
+        {
+            newWaveCooldown -= Time.deltaTime;
+            if (Time.time > nextNewWaveUpdateTime)
+            {
+                UpdateNewWaveCooldownText();
+            }
+        }
+    }
+
+    private void UpdateNewWaveCooldownText()
+    {
+        if (newWaveCooldown <= newWaveCooldownRate)
+        {
+            newWaveCooldown = 0;
+            newWaveCooldownText.text = "";
+            newWaveIsCommingText.text = "";
+        }
+        else
+        {
+            newWaveCooldownText.text = "" + Math.Round(newWaveCooldown, 2);
+        }
+        nextNewWaveUpdateTime += newWaveCooldownRate;
     }
 
     IEnumerator SpawnWave()
@@ -100,7 +136,11 @@ public class GameController : MonoBehaviour
                 Instantiate(enemy, spawnPosition, spawnRotation);
                 yield return new WaitForSeconds(currentLevel.GetSpawnWait());
             }
-            yield return new WaitForSeconds(currentLevel.GetSpawnWait());
+            //set new wave text
+            newWaveIsCommingText.text = "New wave is comming!!!";
+            newWaveCooldown = currentLevel.GetWaveWait();
+            nextNewWaveUpdateTime = Time.time;
+            yield return new WaitForSeconds(currentLevel.GetWaveWait());
             if (gameOver)
             {
                 restart = true;
@@ -131,13 +171,23 @@ public class GameController : MonoBehaviour
     private void UpdateScore()
     {
         UpdateScoreText();
-        if (score < currentLevel.GetDownPoint())
+        if (score < currentLevel.GetDownPoint() || score > currentLevel.GetUpPoint())
         {
-            currentLevel = LevelUtil.DownLevel(currentLevel);
-        }
-        else if (score > currentLevel.GetUpPoint())
-        {
-            currentLevel = LevelUtil.UpLevel(currentLevel);
+            //clear all enemies
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject enemy in enemies)
+            {
+                Destroy(enemy);
+            }
+
+            if (score < currentLevel.GetDownPoint())
+            {
+                currentLevel = LevelUtil.DownLevel(currentLevel);
+            }
+            else if (score > currentLevel.GetUpPoint())
+            {
+                currentLevel = LevelUtil.UpLevel(currentLevel);
+            }
         }
         nextLevel = LevelUtil.GetLevel(currentLevel.GetIndex() + 1);
         UpdateCurrentLevelText();
@@ -146,12 +196,12 @@ public class GameController : MonoBehaviour
 
     private void UpdateCurrentLevelText()
     {
-        CurrentLevelText.text = currentLevel.GetName();
+        currentLevelText.text = currentLevel.GetName();
     }
 
     private void UpdateNextLevelText()
     {
-        NextLevelText.text = "Next Level: " + (nextLevel.GetDownPoint() - score);
+        nextLevelText.text = "Next Level: " + (nextLevel.GetDownPoint() - score);
     }
 
     private void UpdateScoreText()

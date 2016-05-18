@@ -10,6 +10,7 @@ public class Level
     private List<string> answers;
     private int downPoint;
     private int upPoint;
+    private int hintPoint;
     private int enemyEachWaveCount;
     private float waveWait;
     private float spawnWait;
@@ -21,7 +22,7 @@ public class Level
 
     }
 
-    public Level(int index, string name, List<string> questions, List<string> answers, int downPoint, int upPoint,
+    public Level(int index, string name, List<string> questions, List<string> answers, int downPoint, int upPoint, int hintPoint,
         int enemyEachWaveCount, float waveWait, float spawnWait, bool isRotate, bool isFaster)
     {
         this.index = index;
@@ -30,6 +31,7 @@ public class Level
         this.answers = answers;
         this.downPoint = downPoint;
         this.upPoint = upPoint;
+        this.hintPoint = hintPoint;
         this.enemyEachWaveCount = enemyEachWaveCount;
         this.waveWait = waveWait;
         this.spawnWait = spawnWait;
@@ -75,6 +77,11 @@ public class Level
     public int GetUpPoint()
     {
         return upPoint;
+    }
+
+    public int GetHintPoint()
+    {
+        return hintPoint;
     }
 
     public bool IsRotate()

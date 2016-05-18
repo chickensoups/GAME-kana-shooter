@@ -9,6 +9,13 @@ public class RandomRotator : MonoBehaviour
     void Start()
     {
         Rigidbody rigidbody = GetComponent<Rigidbody>();
-        rigidbody.angularVelocity = Random.insideUnitSphere * tumble;
+        if (GameController.currentLevel.IsRotate())
+        {
+            rigidbody.angularVelocity = Random.insideUnitSphere * tumble;
+        }
+        else
+        {
+            rigidbody.angularVelocity = Vector3.zero;
+        }
     }
 }

@@ -17,25 +17,30 @@ public class LevelUtil
         //level 1
         List<string> answer = new List<string>(new[] { "a", "i", "u", "e", "o" });
         List<string> questions = new List<string>(new[] { "あ", "い", "う", "え", "お" });
-        Level level1 = new Level(0, "Level 1", questions, answer, 0, 100, 10, 4 , 2, false, false);
+        Level level1 = new Level(0, "Level 1", questions, answer, 0, 200, 100, 4, 5 , 4, false, false);
 
         //level 2
         answer = new List<string>(new[] { "ka", "ki", "ku", "ke", "ko" });
         questions = new List<string>(new[] { "か", "き", "く", "け", "こ" });
-        Level level2 = new Level(1, "Level 2", questions, answer, 100, 200, 10, 4, 1, true, false);
+        Level level2 = new Level(1, "Level 2", questions, answer, 200, 400, 300, 10, 5, 4, false, false);
 
         //level 3
         answer = new List<string>(new[] { "a", "i", "u", "e", "o", "ka", "ki", "ku", "ke", "ko" });
         questions = new List<string>(new[] { "あ", "い", "う", "え", "お", "か", "き", "く", "け", "こ" });
-        Level level3 = new Level(2, "Level 3", questions, answer, 200, 500, 10, 4, 1, false, false);
+        Level level3 = new Level(2, "Level 3", questions, answer, 400, 700, 500, 15, 5, 4, false, false);
 
         //level 4
+        answer = new List<string>(new[] { "a", "i", "u", "e", "o", "ka", "ki", "ku", "ke", "ko" });
+        questions = new List<string>(new[] { "あ", "い", "う", "え", "お", "か", "き", "く", "け", "こ" });
+        Level level4 = new Level(3, "Level 4", questions, answer, 700, 1000, 800, 15, 5, 4, true, false);
+
+        //level 5
         answer = new List<string>(new[] { "sa", "shi", "su", "se", "so" });
         questions = new List<string>(new[] { "さ", "し", "す", "せ", "そ" });
-        Level level4 = new Level(3, "Level 4", questions, answer, 500, 600, 10, 4, 1, false, false);
+        Level level5 = new Level(4, "Level 5", questions, answer, 1000, 1200, 1100, 10, 4, 1, false, false);
 
         //push all level to levels
-        levels = new List<Level>(new Level[] { level1, level2, level3, level4 });
+        levels = new List<Level>(new Level[] { level1, level2, level3, level4, level5 });
     }
 
 
