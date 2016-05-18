@@ -183,10 +183,14 @@ public class GameController : MonoBehaviour
             if (score < currentLevel.GetDownPoint())
             {
                 currentLevel = LevelUtil.DownLevel(currentLevel);
+                //animation when level down
+                StartCoroutine(MainLightController.LightDown());
             }
             else if (score > currentLevel.GetUpPoint())
             {
                 currentLevel = LevelUtil.UpLevel(currentLevel);
+                //animation when level up
+                StartCoroutine(MainLightController.LightUp());
             }
         }
         nextLevel = LevelUtil.GetLevel(currentLevel.GetIndex() + 1);
