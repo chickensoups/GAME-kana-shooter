@@ -1,6 +1,8 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Timers;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -54,21 +56,55 @@ public class GameController : MonoBehaviour
         return "";
     }
 
+    public void Save()
+    {
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.OpenWrite(Application.persistentDataPath + "/playerInfo.dat");
+
+        PlayerData data = new PlayerData();
+        data.level = currentLevel.GetIndex();
+        data.score = score;
+
+        bf.Serialize(file, data);
+        file.Close();
+    }
+
+    public PlayerData Load()
+    {
+        if (File.Exists(Application.persistentDataPath + "/playerInfo.dat"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.OpenRead(Application.persistentDataPath + "/playerInfo.dat");
+
+            PlayerData data = (PlayerData) bf.Deserialize(file);
+            file.Close();
+            return data;
+        }
+        return null;
+    }
+
     void Start()
     {
 
         //init level data
         LevelUtil.Init();
         //load saved data
-        int savedScore = 50; //TODO: load current score in file
-        int savedLevelIndex = 0; //TODO: load saved level index in file
-
-        //load level from saved data
-        currentLevel = LevelUtil.GetLevel(savedLevelIndex);
-        nextLevel = LevelUtil.GetLevel(savedLevelIndex + 1);
-
-        //init ui
-        score = savedScore;
+        PlayerData savedData = Load();
+        if (savedData != null)
+        {
+            //load level and score depend on saved data
+            currentLevel = LevelUtil.GetLevel(savedData.level);
+            nextLevel = LevelUtil.GetLevel(savedData.level + 1);
+            score = savedData.score;
+        }
+        else
+        {
+            //load level and score depend on saved data
+            currentLevel = LevelUtil.GetLevel(1);
+            nextLevel = LevelUtil.GetLevel(2);
+            score = 0;
+        }
+        
         UpdateScore();
 
         newWaveCooldown = 0;
@@ -94,7 +130,6 @@ public class GameController : MonoBehaviour
             {
                 restart = false;
                 gameOver = false;
-                //Application.LoadLevel(Application.loadedLevel);
                 SceneManager.LoadScene("Main");
             }
         }
@@ -175,9 +210,10 @@ public class GameController : MonoBehaviour
         {
             //clear all enemies
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            foreach (GameObject enemy in enemies)
+            foreach (GameObject e in enemies)
             {
-                Destroy(enemy);
+                Destroy(e);
+                //TODO: display animation in the center of the screen
             }
 
             if (score < currentLevel.GetDownPoint())
@@ -192,6 +228,7 @@ public class GameController : MonoBehaviour
                 //animation when level up
                 StartCoroutine(MainLightController.LightUp());
             }
+            Save();
         }
         nextLevel = LevelUtil.GetLevel(currentLevel.GetIndex() + 1);
         UpdateCurrentLevelText();

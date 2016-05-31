@@ -36,7 +36,7 @@ public class DestroyByContact : MonoBehaviour
                 string question = gameObject.GetComponentInChildren<TextMesh>().text;
                 if (GameController.GetQuestion(answer).Equals(question))
                 {
-                    gameController.AddScore(70);
+                    gameController.AddScore(10);
                     Destroy(gameObject);
                     Instantiate(enemyExplosion, transform.position, transform.rotation);
                 }
@@ -51,7 +51,7 @@ public class DestroyByContact : MonoBehaviour
 
         if (other.tag == "Barrier")
         {
-            gameController.MinusScore(70);
+            gameController.MinusScore(5);
             Destroy(gameObject);
             Instantiate(enemyExplosion, transform.position, transform.rotation);
         }
