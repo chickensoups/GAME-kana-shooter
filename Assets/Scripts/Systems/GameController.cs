@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
     public GameObject enemy;
 
     private int score;
+    public static bool hint;
     public Text scoreText;
 
     public Text currentLevelText;
@@ -27,11 +28,24 @@ public class GameController : MonoBehaviour
     public Text newWaveCooldownText;
 
     public Text welcomeMessageText;
+    public Text levelChangeMessage;
 
     public static int currentEnemyId;
 
     public static Level currentLevel;
     private Level nextLevel;
+
+    public Sprite pauseBtnImg;
+    public Sprite resumeBtnImg;
+
+    public AudioSource[] audios;
+
+    private AudioSource bgAudio;
+    private AudioSource levelUpAudio;
+    private AudioSource levelDownAudio;
+
+    private Button pauseBtn;
+    private bool pause;
 
     public static string GetQuestion(string answer)
     {
@@ -51,6 +65,16 @@ public class GameController : MonoBehaviour
             return currentLevel.GetAnswers()[index];
         }
         return "";
+    }
+
+    public static string GetQuestion(int index)
+    {
+        return currentLevel.GetQuestions()[index];
+    }
+
+    public static string GetAnswer(int index)
+    {
+        return currentLevel.GetAnswers()[index];
     }
 
     public void Save()
@@ -113,8 +137,36 @@ public class GameController : MonoBehaviour
         newWaveCooldownText.text = "";
         newWaveIsCommingText.text = ""; 
 
+        //init pause/resume button
+        pauseBtn = GameObject.FindGameObjectWithTag("PauseBtn").GetComponent<Button>();
+        pauseBtn.onClick.AddListener(PauseButtonClick);
+        pause = false;
+
+        //init audio sources
+        audios = GetComponents<AudioSource>();
+        bgAudio = audios[0];
+        levelUpAudio = audios[1];
+        levelDownAudio = audios[2];
+
         //start spawn enemy
         StartCoroutine(SpawnWave());
+    }
+
+    void PauseButtonClick()
+    {
+        if (pause)
+        {
+            pauseBtn.GetComponentInParent<Image>().sprite = pauseBtnImg;
+            Time.timeScale = 1;
+            bgAudio.volume = 1.0f;
+        }
+        else
+        {
+            pauseBtn.GetComponentInParent<Image>().sprite = resumeBtnImg;
+            Time.timeScale = 0;
+            bgAudio.volume = 0.0f;
+        }
+        pause = !pause;
     }
 
     void Update()
@@ -179,6 +231,7 @@ public class GameController : MonoBehaviour
     private void UpdateScore()
     {
         UpdateScoreText();
+        hint = score < currentLevel.GetHintPoint();
         if (score < currentLevel.GetDownPoint() || score > currentLevel.GetUpPoint())
         {
             //clear all enemies
@@ -194,12 +247,18 @@ public class GameController : MonoBehaviour
                 currentLevel = LevelUtil.DownLevel(currentLevel);
                 //animation when level down
                 StartCoroutine(MainLightController.LightDown());
+                StartCoroutine(DisplayLevelUpDownMessage("So sad, Round down!"));
+                //audio when level down
+                levelDownAudio.Play();
             }
             else if (score > currentLevel.GetUpPoint())
             {
                 currentLevel = LevelUtil.UpLevel(currentLevel);
                 //animation when level up
                 StartCoroutine(MainLightController.LightUp());
+                StartCoroutine(DisplayLevelUpDownMessage("Great, Round up!"));
+                //audio when level up
+                levelUpAudio.Play();
             }
             Save();
             //display welcome message
@@ -217,6 +276,13 @@ public class GameController : MonoBehaviour
         welcomeMessageText.text = "";
     }
 
+    private IEnumerator DisplayLevelUpDownMessage(string message)
+    {
+        levelChangeMessage.text = message;
+        yield return new WaitForSeconds(2);
+        levelChangeMessage.text = "";
+    }
+
     private void UpdateCurrentLevelText()
     {
         currentLevelText.text = currentLevel.GetName();
@@ -224,11 +290,27 @@ public class GameController : MonoBehaviour
 
     private void UpdateNextLevelText()
     {
-        nextLevelText.text = "Next Level: " + (nextLevel.GetDownPoint() - score);
+        nextLevelText.text = "Next Round: " + (nextLevel.GetDownPoint() - score);
     }
 
     private void UpdateScoreText()
     {
         scoreText.text = "Score: " + score;
     }
+
+    public void OnApplicationQuit()
+    {
+        Save();
+    }
+
+    public void OnApplicationPause(bool pauseStatus)
+    {
+        pause = pauseStatus;
+    }
+
+    public void OnApplication()
+    {
+        pause = false;
+    }
+
 }

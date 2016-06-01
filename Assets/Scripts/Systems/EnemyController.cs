@@ -11,9 +11,17 @@ public class EnemyController : MonoBehaviour
 	void Start ()
 	{
         //render text
-        TextMesh label = gameObject.GetComponentInChildren<TextMesh>();
+        TextMesh[] labels = gameObject.GetComponentsInChildren<TextMesh>();
 	    labelIndex = Mathf.CeilToInt(Random.value*(GameController.currentLevel.GetQuestions().Count - 1));
-        label.text = GameController.currentLevel.GetQuestions()[labelIndex];
+        string question = GameController.GetQuestion(labelIndex);
+        TextMesh enemyLabel = labels[0];
+	    enemyLabel.text = question;
+	    if (GameController.hint)
+	    {
+	        string answer = GameController.GetAnswer(labelIndex);
+            TextMesh hintLabel = labels[1];
+            hintLabel.text = answer;
+	    }
         if (!WeaponController.hadTarget)
         {
             isTarget = true;

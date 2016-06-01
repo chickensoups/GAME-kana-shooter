@@ -45,6 +45,10 @@ public class PlayerController : MonoBehaviour
             Instantiate(bolt, boltSpawn.transform.position, boltSpawn.transform.rotation);
             GetComponent<AudioSource>().Play();
         }
+    }
+
+    void FixedUpdate()
+    {
         //move player
         Rigidbody rigidbody = GetComponent<Rigidbody>();
         float distance = rigidbody.position.x - targetPosition.x;
