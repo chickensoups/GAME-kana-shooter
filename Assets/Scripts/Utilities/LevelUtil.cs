@@ -16,7 +16,7 @@ public class LevelUtil
     {
         //level 1
         int index = 0;
-        string name = "Level " + index;
+        string name = "Round " + index;
         string welcomeMessage = "OMG! Negative point! Trying more!";
         List<string> answer = new List<string>(new[] { "a", "i", "u", "e", "o" });
         List<string> questions = new List<string>(new[] { "あ", "い", "う", "え", "お" });
@@ -32,8 +32,8 @@ public class LevelUtil
         Level level0 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
 
         index += 1;
-        name = "Level " + index;
-        welcomeMessage = "Welcome to Hiraga Zone!";
+        name = "Round " + index;
+        welcomeMessage = "Welcome to Hiragana Zone!";
         downPoint = 0;
         upPoint = 200;
         hintPoint = downPoint + 50;
@@ -50,7 +50,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "ka", "ki", "ku", "ke", "ko" });
         questions = new List<string>(new[] { "か", "き", "く", "け", "こ" });
         index += 1;
-        name = "Level " + index;
+        name = "Round " + index;
         downPoint = upPoint;
         upPoint = 400;
         hintPoint = downPoint + 50;
@@ -66,7 +66,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "a", "i", "u", "e", "o", "ka", "ki", "ku", "ke", "ko" });
         questions = new List<string>(new[] { "あ", "い", "う", "え", "お", "か", "き", "く", "け", "こ" });
         index += 1;
-        name = "Level " + index;
+        name = "Round " + index;
         downPoint = upPoint;
         upPoint = 700;
         hintPoint = downPoint + 50;
@@ -78,9 +78,9 @@ public class LevelUtil
         Level level3 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
 
         //level 4
-        welcomeMessage = "Practice harder with faster and rotate enemy!";
+        welcomeMessage = "Rolling in the deep!";
         index += 1;
-        name = "Level " + index;
+        name = "Round " + index;
         downPoint = upPoint;
         upPoint = 1000;
         hintPoint = downPoint + 50;
@@ -96,7 +96,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "sa", "shi", "su", "se", "so" });
         questions = new List<string>(new[] { "さ", "し", "す", "せ", "そ" });
         index += 1;
-        name = "Level " + index;
+        name = "Round " + index;
         downPoint = upPoint;
         upPoint = 1200;
         hintPoint = downPoint + 50;
@@ -112,7 +112,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "ta", "chi", "tsu", "te", "to" });
         questions = new List<string>(new[] { "た", "ち", "つ", "て", "と" });
         index += 1;
-        name = "Level " + index;
+        name = "Round " + index;
         downPoint = upPoint;
         upPoint = 1400;
         hintPoint = downPoint + 50;
@@ -128,7 +128,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "sa", "shi", "su", "se", "so", "ta", "chi", "tsu", "te", "to" });
         questions = new List<string>(new[] { "さ", "し", "す", "せ", "そ", "た", "ち", "つ", "て", "と" });
         index += 1;
-        name = "Level " + index;
+        name = "Round " + index;
         downPoint = upPoint;
         upPoint = 1700;
         hintPoint = downPoint + 50;
@@ -142,7 +142,7 @@ public class LevelUtil
         //level 8
         welcomeMessage = "You did the right thing. Move on!";
         index += 1;
-        name = "Level " + index;
+        name = "Round " + index;
         downPoint = upPoint;
         upPoint = 2000;
         hintPoint = downPoint + 50;
@@ -158,7 +158,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "a", "i", "u", "e", "o", "ka", "ki", "ku", "ke", "ko", "sa", "shi", "su", "se", "so", "ta", "chi", "tsu", "te", "to" });
         questions = new List<string>(new[] { "あ", "い", "う", "え", "お", "か", "き", "く", "け", "こ", "さ", "し", "す", "せ", "そ", "た", "ち", "つ", "て", "と" });
         index += 1;
-        name = "Level " + index;
+        name = "Round " + index;
         downPoint = upPoint;
         upPoint = 2500;
         hintPoint = downPoint + 100;
@@ -172,7 +172,7 @@ public class LevelUtil
         //level 10
         welcomeMessage = "I like rotate and buff speed so much :D";
         index += 1;
-        name = "Level " + index;
+        name = "Round " + index;
         downPoint = upPoint;
         upPoint = 3000;
         hintPoint = downPoint + 100;
@@ -188,7 +188,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "na", "ni", "nu", "ne", "no" });
         questions = new List<string>(new[] { "な", "に", "ぬ", "ね", "の" });
         index += 1;
-        name = "Level " + index;
+        name = "Round " + index;
         downPoint = upPoint;
         upPoint = 3200;
         hintPoint = downPoint + 50;
@@ -204,7 +204,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "ha", "hi", "fu", "he", "ho" });
         questions = new List<string>(new[] { "は", "ひ", "ふ", "へ", "ほ" });
         index += 1;
-        name = "Level " + index;
+        name = "Round " + index;
         downPoint = upPoint;
         upPoint = 3400;
         hintPoint = downPoint + 50;
@@ -220,7 +220,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "na", "ni", "nu", "ne", "no", "ha", "hi", "fu", "he", "ho" });
         questions = new List<string>(new[] { "な", "に", "ぬ", "ね", "の", "は", "ひ", "ふ", "へ", "ほ" });
         index += 1;
-        name = "Level " + index;
+        name = "Round " + index;
         downPoint = upPoint;
         upPoint = 3700;
         hintPoint = downPoint + 50;
@@ -234,7 +234,7 @@ public class LevelUtil
         //level 14
         welcomeMessage = "Rolling in the deeperrrr!!";
         index += 1;
-        name = "Level " + index;
+        name = "Round " + index;
         downPoint = upPoint;
         upPoint = 4000;
         hintPoint = downPoint + 50;
@@ -250,7 +250,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "ma", "mi", "mu", "me", "mo" });
         questions = new List<string>(new[] { "ま", "み", "む", "め", "も" });
         index += 1;
-        name = "Level " + index;
+        name = "Round " + index;
         downPoint = upPoint;
         upPoint = 4200;
         hintPoint = downPoint + 50;
@@ -266,7 +266,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "ra", "ri", "ru", "re", "ro" });
         questions = new List<string>(new[] { "ら", "り", "る", "れ", "ろ" });
         index += 1;
-        name = "Level " + index;
+        name = "Round " + index;
         downPoint = upPoint;
         upPoint = 4400;
         hintPoint = downPoint + 50;
@@ -282,7 +282,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "ma", "mi", "mu", "me", "mo", "ra", "ri", "ru", "re", "ro" });
         questions = new List<string>(new[] { "ま", "み", "む", "め", "も", "ら", "り", "る", "れ", "ろ", });
         index += 1;
-        name = "Level " + index;
+        name = "Round " + index;
         downPoint = upPoint;
         upPoint = 4700;
         hintPoint = downPoint + 50;
@@ -296,7 +296,7 @@ public class LevelUtil
         //level 18
         welcomeMessage = "Mixing, rolling, running T_T";
         index += 1;
-        name = "Level " + index;
+        name = "Round " + index;
         downPoint = upPoint;
         upPoint = 5000;
         hintPoint = downPoint + 50;
@@ -312,7 +312,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "na", "ni", "nu", "ne", "no", "ha", "hi", "fu", "he", "ho", "ma", "mi", "mu", "me", "mo", "ra", "ri", "ru", "re", "ro" });
         questions = new List<string>(new[] { "な", "に", "ぬ", "ね", "の", "は", "ひ", "ふ", "へ", "ほ", "ま", "み", "む", "め", "も", "ら", "り", "る", "れ", "ろ" });
         index += 1;
-        name = "Level " + index;
+        name = "Round " + index;
         downPoint = upPoint;
         upPoint = 5500;
         hintPoint = downPoint + 50;
@@ -326,7 +326,7 @@ public class LevelUtil
         //level 20
         welcomeMessage = "YTTOR, GNIHTON OT ETIRW EREH";
         index += 1;
-        name = "Level " + index;
+        name = "Round " + index;
         downPoint = upPoint;
         upPoint = 6000;
         hintPoint = downPoint + 50;
@@ -342,7 +342,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "ya", "yu", "yo" });
         questions = new List<string>(new[] { "や", "ゆ", "よ" });
         index += 1;
-        name = "Level " + index;
+        name = "Round " + index;
         downPoint = upPoint;
         upPoint = 6200;
         hintPoint = downPoint + 50;
@@ -358,7 +358,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "wa", "wo", "n" });
         questions = new List<string>(new[] { "わ", "を", "ん" });
         index += 1;
-        name = "Level " + index;
+        name = "Round " + index;
         downPoint = upPoint;
         upPoint = 6400;
         hintPoint = downPoint + 50;
@@ -374,7 +374,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "ya", "yu", "yo", "wa", "wo", "n" });
         questions = new List<string>(new[] { "や", "ゆ", "よ", "わ", "を", "ん" });
         index += 1;
-        name = "Level " + index;
+        name = "Round " + index;
         downPoint = upPoint;
         upPoint = 6700;
         hintPoint = downPoint + 50;
@@ -388,7 +388,7 @@ public class LevelUtil
         //level 24
         welcomeMessage = "Try your best! You almost reach awesome point!";
         index += 1;
-        name = "Level " + index;
+        name = "Round " + index;
         downPoint = upPoint;
         upPoint = 7000;
         hintPoint = downPoint + 50;
@@ -404,7 +404,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "a", "i", "u", "e", "o", "ka", "ki", "ku", "ke", "ko", "sa", "shi", "su", "se", "so", "ta", "chi", "tsu", "te", "to", "na", "ni", "nu", "ne", "no", "ha", "hi", "fu", "he", "ho", "ma", "mi", "mu", "me", "mo", "ra", "ri", "ru", "re", "ro", "ya", "yu", "yo", "wa", "wo", "n" });
         questions = new List<string>(new[] { "あ", "い", "う", "え", "お", "か", "き", "く", "け", "こ", "さ", "し", "す", "せ", "そ", "た", "ち", "つ", "て", "と", "な", "に", "ぬ", "ね", "の", "は", "ひ", "ふ", "へ", "ほ", "ま", "み", "む", "め", "も", "ら", "り", "る", "れ", "ろ", "や", "ゆ", "よ", "わ", "を", "ん" });
         index += 1;
-        name = "Level " + index;
+        name = "Round " + index;
         downPoint = upPoint;
         upPoint = 8500;
         hintPoint = downPoint + 100;
@@ -418,7 +418,7 @@ public class LevelUtil
         //level 26, hiragana final
         welcomeMessage = "Last round of Hiragana Zone!";
         index += 1;
-        name = "Level " + index;
+        name = "Round " + index;
         downPoint = upPoint;
         upPoint = 10000;
         hintPoint = downPoint + 100;

@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Timers;
@@ -25,11 +26,7 @@ public class GameController : MonoBehaviour
     public Text newWaveIsCommingText;
     public Text newWaveCooldownText;
 
-    private bool gameOver;
-    public Text gameOverText;
-
-    private bool restart;
-    public Text restartText;
+    public Text welcomeMessageText;
 
     public static int currentEnemyId;
 
@@ -104,7 +101,10 @@ public class GameController : MonoBehaviour
             nextLevel = LevelUtil.GetLevel(2);
             score = 0;
         }
-        
+
+        //display welcome message
+        StartCoroutine(DisplayWelcomeMessage());
+        //Update Score first time
         UpdateScore();
 
         newWaveCooldown = 0;
@@ -113,27 +113,12 @@ public class GameController : MonoBehaviour
         newWaveCooldownText.text = "";
         newWaveIsCommingText.text = ""; 
 
-        gameOver = false;
-        gameOverText.text = "";
-
-        restart = false;
-        restartText.text = "";
         //start spawn enemy
         StartCoroutine(SpawnWave());
     }
 
     void Update()
     {
-        if (restart)
-        {
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                restart = false;
-                gameOver = false;
-                SceneManager.LoadScene("Main");
-            }
-        }
-
         if (newWaveCooldown > 0)
         {
             newWaveCooldown -= Time.deltaTime;
@@ -176,12 +161,6 @@ public class GameController : MonoBehaviour
             newWaveCooldown = currentLevel.GetWaveWait();
             nextNewWaveUpdateTime = Time.time;
             yield return new WaitForSeconds(currentLevel.GetWaveWait());
-            if (gameOver)
-            {
-                restart = true;
-                restartText.text = "Press 'R' to restart!";
-                break;
-            }
         }
     }
 
@@ -196,13 +175,7 @@ public class GameController : MonoBehaviour
         score -= scoreToMinus;
         UpdateScore();
     }
-
-    public void GameOver()
-    {
-        gameOver = true;
-        gameOverText.text = "Game Over";
-    }
-
+    
     private void UpdateScore()
     {
         UpdateScoreText();
@@ -229,10 +202,19 @@ public class GameController : MonoBehaviour
                 StartCoroutine(MainLightController.LightUp());
             }
             Save();
+            //display welcome message
+            StartCoroutine(DisplayWelcomeMessage());
         }
         nextLevel = LevelUtil.GetLevel(currentLevel.GetIndex() + 1);
         UpdateCurrentLevelText();
         UpdateNextLevelText();
+    }
+
+    private IEnumerator DisplayWelcomeMessage()
+    {
+        welcomeMessageText.text = currentLevel.GetWelcomeMessage();
+        yield return new WaitForSeconds(2);
+        welcomeMessageText.text = "";
     }
 
     private void UpdateCurrentLevelText()
