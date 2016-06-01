@@ -41,7 +41,7 @@ public class LevelUtil
         waveWait = 5;
         spawnWait = 4;
         isRotate = false;
-        isFaster = false;
+        isFaster = true;
 
         Level level1 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
 
@@ -54,11 +54,11 @@ public class LevelUtil
         downPoint = upPoint;
         upPoint = 400;
         hintPoint = downPoint + 50;
-        enemyEachWaveCount = 4;
+        enemyEachWaveCount = 5;
         waveWait = 5;
         spawnWait = 4;
-        isRotate = false;
-        isFaster = false;
+        isRotate = true;
+        isFaster = true;
         Level level2 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
 
         //level 3
@@ -70,11 +70,11 @@ public class LevelUtil
         downPoint = upPoint;
         upPoint = 700;
         hintPoint = downPoint + 50;
-        enemyEachWaveCount = 4;
+        enemyEachWaveCount = 10;
         waveWait = 5;
         spawnWait = 4;
         isRotate = false;
-        isFaster = false;
+        isFaster = true;
         Level level3 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
 
         //level 4
@@ -84,9 +84,9 @@ public class LevelUtil
         downPoint = upPoint;
         upPoint = 1000;
         hintPoint = downPoint + 50;
-        enemyEachWaveCount = 4;
+        enemyEachWaveCount = 10;
         waveWait = 5;
-        spawnWait = 4;
+        spawnWait = 3;
         isRotate = true;
         isFaster = true;
         Level level4 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
@@ -100,7 +100,7 @@ public class LevelUtil
         downPoint = upPoint;
         upPoint = 1200;
         hintPoint = downPoint + 50;
-        enemyEachWaveCount = 4;
+        enemyEachWaveCount = 5;
         waveWait = 5;
         spawnWait = 4;
         isRotate = false;
@@ -116,7 +116,7 @@ public class LevelUtil
         downPoint = upPoint;
         upPoint = 1400;
         hintPoint = downPoint + 50;
-        enemyEachWaveCount = 4;
+        enemyEachWaveCount = 5;
         waveWait = 5;
         spawnWait = 4;
         isRotate = false;
@@ -132,11 +132,11 @@ public class LevelUtil
         downPoint = upPoint;
         upPoint = 1700;
         hintPoint = downPoint + 50;
-        enemyEachWaveCount = 4;
+        enemyEachWaveCount = 10;
         waveWait = 5;
         spawnWait = 4;
         isRotate = false;
-        isFaster = false;
+        isFaster = true;
         Level level7 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
 
         //level 8
@@ -148,7 +148,7 @@ public class LevelUtil
         hintPoint = downPoint + 50;
         enemyEachWaveCount = 4;
         waveWait = 5;
-        spawnWait = 4;
+        spawnWait = 3;
         isRotate = true;
         isFaster = true;
         Level level8 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
@@ -162,11 +162,11 @@ public class LevelUtil
         downPoint = upPoint;
         upPoint = 2500;
         hintPoint = downPoint + 100;
-        enemyEachWaveCount = 4;
+        enemyEachWaveCount = 12;
         waveWait = 5;
         spawnWait = 4;
         isRotate = false;
-        isFaster = false;
+        isFaster = true;
         Level level9 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
 
         //level 10
@@ -176,9 +176,9 @@ public class LevelUtil
         downPoint = upPoint;
         upPoint = 3000;
         hintPoint = downPoint + 100;
-        enemyEachWaveCount = 4;
+        enemyEachWaveCount = 12;
         waveWait = 5;
-        spawnWait = 4;
+        spawnWait = 3;
         isRotate = true;
         isFaster = true;
         Level level10 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
@@ -192,7 +192,7 @@ public class LevelUtil
         downPoint = upPoint;
         upPoint = 3200;
         hintPoint = downPoint + 50;
-        enemyEachWaveCount = 4;
+        enemyEachWaveCount = 5;
         waveWait = 5;
         spawnWait = 4;
         isRotate = false;
@@ -208,7 +208,7 @@ public class LevelUtil
         downPoint = upPoint;
         upPoint = 3400;
         hintPoint = downPoint + 50;
-        enemyEachWaveCount = 4;
+        enemyEachWaveCount = 5;
         waveWait = 5;
         spawnWait = 4;
         isRotate = false;
@@ -224,11 +224,11 @@ public class LevelUtil
         downPoint = upPoint;
         upPoint = 3700;
         hintPoint = downPoint + 50;
-        enemyEachWaveCount = 4;
+        enemyEachWaveCount = 10;
         waveWait = 5;
         spawnWait = 4;
         isRotate = false;
-        isFaster = false;
+        isFaster = true;
         Level level13 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
 
         //level 14
@@ -238,7 +238,7 @@ public class LevelUtil
         downPoint = upPoint;
         upPoint = 4000;
         hintPoint = downPoint + 50;
-        enemyEachWaveCount = 4;
+        enemyEachWaveCount = 10;
         waveWait = 5;
         spawnWait = 4;
         isRotate = true;
@@ -254,7 +254,7 @@ public class LevelUtil
         downPoint = upPoint;
         upPoint = 4200;
         hintPoint = downPoint + 50;
-        enemyEachWaveCount = 4;
+        enemyEachWaveCount = 5;
         waveWait = 5;
         spawnWait = 4;
         isRotate = false;
@@ -270,7 +270,7 @@ public class LevelUtil
         downPoint = upPoint;
         upPoint = 4400;
         hintPoint = downPoint + 50;
-        enemyEachWaveCount = 4;
+        enemyEachWaveCount = 5;
         waveWait = 5;
         spawnWait = 4;
         isRotate = false;
@@ -286,11 +286,11 @@ public class LevelUtil
         downPoint = upPoint;
         upPoint = 4700;
         hintPoint = downPoint + 50;
-        enemyEachWaveCount = 4;
+        enemyEachWaveCount = 10;
         waveWait = 5;
         spawnWait = 4;
         isRotate = false;
-        isFaster = false;
+        isFaster = true;
         Level level17 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
 
         //level 18
@@ -300,9 +300,9 @@ public class LevelUtil
         downPoint = upPoint;
         upPoint = 5000;
         hintPoint = downPoint + 50;
-        enemyEachWaveCount = 4;
+        enemyEachWaveCount = 10;
         waveWait = 5;
-        spawnWait = 4;
+        spawnWait = 3;
         isRotate = true;
         isFaster = true;
         Level level18 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
@@ -316,11 +316,11 @@ public class LevelUtil
         downPoint = upPoint;
         upPoint = 5500;
         hintPoint = downPoint + 50;
-        enemyEachWaveCount = 4;
+        enemyEachWaveCount = 12;
         waveWait = 5;
         spawnWait = 4;
         isRotate = false;
-        isFaster = false;
+        isFaster = true;
         Level level19 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
 
         //level 20
@@ -330,7 +330,7 @@ public class LevelUtil
         downPoint = upPoint;
         upPoint = 6000;
         hintPoint = downPoint + 50;
-        enemyEachWaveCount = 4;
+        enemyEachWaveCount = 12;
         waveWait = 5;
         spawnWait = 4;
         isRotate = true;
@@ -346,7 +346,7 @@ public class LevelUtil
         downPoint = upPoint;
         upPoint = 6200;
         hintPoint = downPoint + 50;
-        enemyEachWaveCount = 4;
+        enemyEachWaveCount = 5;
         waveWait = 5;
         spawnWait = 4;
         isRotate = false;
@@ -362,7 +362,7 @@ public class LevelUtil
         downPoint = upPoint;
         upPoint = 6400;
         hintPoint = downPoint + 50;
-        enemyEachWaveCount = 4;
+        enemyEachWaveCount = 5;
         waveWait = 5;
         spawnWait = 4;
         isRotate = false;
@@ -378,11 +378,11 @@ public class LevelUtil
         downPoint = upPoint;
         upPoint = 6700;
         hintPoint = downPoint + 50;
-        enemyEachWaveCount = 4;
+        enemyEachWaveCount = 10;
         waveWait = 5;
         spawnWait = 4;
         isRotate = false;
-        isFaster = false;
+        isFaster = true;
         Level level23 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
 
         //level 24
@@ -392,7 +392,7 @@ public class LevelUtil
         downPoint = upPoint;
         upPoint = 7000;
         hintPoint = downPoint + 50;
-        enemyEachWaveCount = 4;
+        enemyEachWaveCount = 10;
         waveWait = 5;
         spawnWait = 4;
         isRotate = true;
@@ -408,11 +408,11 @@ public class LevelUtil
         downPoint = upPoint;
         upPoint = 8500;
         hintPoint = downPoint + 100;
-        enemyEachWaveCount = 4;
-        waveWait = 5;
-        spawnWait = 4;
+        enemyEachWaveCount = 15;
+        waveWait = 4;
+        spawnWait = 3;
         isRotate = false;
-        isFaster = false;
+        isFaster = true;
         Level level25 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
 
         //level 26, hiragana final
