@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -6,6 +7,7 @@ public class Level
 {
     private int index;
     private string name;
+    private string welcomeMessage;
     private List<string> questions;
     private List<string> answers;
     private int downPoint;
@@ -22,11 +24,12 @@ public class Level
 
     }
 
-    public Level(int index, string name, List<string> questions, List<string> answers, int downPoint, int upPoint, int hintPoint,
+    public Level(int index, string name, string welcomeMessage, List<string> questions, List<string> answers, int downPoint, int upPoint, int hintPoint,
         int enemyEachWaveCount, float waveWait, float spawnWait, bool isRotate, bool isFaster)
     {
         this.index = index;
         this.name = name;
+        this.welcomeMessage = welcomeMessage;
         this.questions = questions;
         this.answers = answers;
         this.downPoint = downPoint;
@@ -97,5 +100,10 @@ public class Level
     public string GetName()
     {
         return name;
+    }
+
+    public string GetWelcomeMessage()
+    {
+        return welcomeMessage;
     }
 }
