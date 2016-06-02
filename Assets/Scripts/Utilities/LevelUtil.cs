@@ -46,7 +46,7 @@ public class LevelUtil
         Level level1 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
 
         //level 2
-        welcomeMessage = "Ops, you had level up!";
+        welcomeMessage = "Ops, nice bro! try this one!";
         answer = new List<string>(new[] { "ka", "ki", "ku", "ke", "ko" });
         questions = new List<string>(new[] { "か", "き", "く", "け", "こ" });
         index += 1;

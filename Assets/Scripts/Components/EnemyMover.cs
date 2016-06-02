@@ -12,9 +12,13 @@ public class EnemyMover : MonoBehaviour
             float randValue = Random.value;
             if (randValue > 0.5f)
             {
-                speed = speed * 2;
-                GetComponentInParent<TrailRenderer>().enabled = true;
+                speed = speed*2;
+                transform.Find("particle").GetComponent<ParticleSystem>().Play();
                 transform.Find("enemy_label").GetComponent<TextMesh>().color = Color.green;
+            }
+            else
+            {
+                transform.Find("particle").GetComponent<ParticleSystem>().Clear();
             }
         }
         GetComponent<Rigidbody>().velocity = transform.forward*speed;

@@ -4,16 +4,9 @@ using System.Collections;
 using System.Net;
 using System.Xml.Schema;
 
-[System.Serializable]
-public class Boundary
-{
-    public float xMin, xMax, zMin, zMax;
-}
-
 public class PlayerController : MonoBehaviour
 {
     public float speed;
-    public Boundary boundary;
     public float tilt;
 
     public GameObject bolt;
@@ -77,7 +70,7 @@ public class PlayerController : MonoBehaviour
         rigidbody.velocity = (targetPosition - transform.position).normalized * speed;
 
         rigidbody.position = new Vector3(
-            Mathf.Clamp(rigidbody.position.x, boundary.xMin, boundary.xMax),
+            Mathf.Clamp(rigidbody.position.x, -6, 6),
             0.0f,
             0.0f
             );
