@@ -12,21 +12,6 @@ public class WeaponController : MonoBehaviour
     private static GameObject choosenWeapon;
     public static bool hadTarget;
 
-    void Awake()
-    {
-        WeaponChoosen.WeaponChanged += ChooseWeapon;
-        EnemyController.TargetFound += ChangeWeaponLabel;
-    }
-
-    void Start()
-    {
-        weapon1 = GameObject.Find("Weapon1");
-        weapon2 = GameObject.Find("Weapon2");
-        weapon3 = GameObject.Find("Weapon3");
-        weapon4 = GameObject.Find("Weapon4");
-        ChooseWeapon(weapon1);
-        hadTarget = false;
-    }
 
     public static string GetChoosenWeaponName()
     {
@@ -90,7 +75,7 @@ public class WeaponController : MonoBehaviour
                 for (int i = 0; i < answersWithoutTrueAnswerList.Count; i++)
                 {
                     string tmpAnswer = answersWithoutTrueAnswerList[i];
-                    int j = Mathf.CeilToInt(Random.Range(0, answersWithoutTrueAnswerList.Count-1));
+                    int j = Mathf.CeilToInt(Random.Range(0, answersWithoutTrueAnswerList.Count - 1));
                     answersWithoutTrueAnswerList[i] = answersWithoutTrueAnswerList[j];
                     answersWithoutTrueAnswerList[j] = tmpAnswer;
                 }
@@ -120,5 +105,21 @@ public class WeaponController : MonoBehaviour
             hadTarget = false;
         }
 
+    }
+
+    void Awake()
+    {
+        WeaponChoosen.WeaponChanged += ChooseWeapon;
+        EnemyController.TargetFound += ChangeWeaponLabel;
+    }
+
+    void Start()
+    {
+        weapon1 = GameObject.Find("Weapon1");
+        weapon2 = GameObject.Find("Weapon2");
+        weapon3 = GameObject.Find("Weapon3");
+        weapon4 = GameObject.Find("Weapon4");
+        ChooseWeapon(weapon1);
+        hadTarget = false;
     }
 }

@@ -12,7 +12,7 @@ public class EnemyMover : MonoBehaviour
             float randValue = Random.value;
             if (randValue > 0.5f)
             {
-                speed = speed*2;
+                speed = speed*1.6f;
                 transform.Find("particle").GetComponent<ParticleSystem>().Play();
                 transform.Find("enemy_label").GetComponent<TextMesh>().color = Color.green;
             }

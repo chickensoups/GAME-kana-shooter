@@ -1,12 +1,14 @@
 fileFormatVersion: 2
 guid: e5a60a024c7fafd43af1dbdcd13e1ce6
-timeCreated: 1463041395
+timeCreated: 1464854232
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
-  - explosion: {fileID: 100004, guid: 2857e183f4cd3df4e9096e5b578bd32f, type: 2}
-  - playerExplosion: {fileID: 100008, guid: a93496017806b7740910df5fd946f306, type: 2}
+  - enemyExplosion: {instanceID: 0}
+  - wrongBulletExplosion: {instanceID: 0}
+  - gameController: {instanceID: 0}
+  - scoreAnimationText: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

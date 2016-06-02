@@ -44,6 +44,9 @@ public class GameController : MonoBehaviour
     private AudioSource levelUpAudio;
     private AudioSource levelDownAudio;
 
+    public GameObject scoreAnimationText;
+    public GameObject enemyExplosion;
+
     private Button pauseBtn;
     private bool pause;
 
@@ -107,6 +110,8 @@ public class GameController : MonoBehaviour
     private void WeaponChanged(GameObject weapon)
     {
         MinusScore(Constants.CHANGE_WEAPON_MINUS_SCORE);
+        GameObject scoreTextAnimation = (GameObject)Instantiate(scoreAnimationText, weapon.transform.position, Quaternion.identity);
+        scoreTextAnimation.GetComponentInChildren<TextMesh>().text = "-" + Constants.CHANGE_WEAPON_MINUS_SCORE;
     }
 
     void PauseButtonClick()
@@ -183,8 +188,8 @@ public class GameController : MonoBehaviour
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
             foreach (GameObject e in enemies)
             {
+                Instantiate(enemyExplosion, e.transform.position, e.transform.rotation);
                 Destroy(e);
-                //TODO: display animation in the center of the screen
             }
 
             if (score < currentLevel.GetDownPoint())
