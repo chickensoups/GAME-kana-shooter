@@ -3,7 +3,8 @@ using System.Collections;
 
 public class Constants : MonoBehaviour
 {
-    public static string[] ENG_CHARS = {"a", "i", "u", "e", "o", "ka", "ki", "ku", "ke", "ko"};
-    public static string[] HIRA_CHARS = { "あ", "い", "う", "え", "お", "か", "き", "く", "け", "こ" };
-    public static string[] KATA_CHARS = { "ア", "イ", "ウ", "エ", "オ", "カ", "キ", "ク", "ケ", "コ" };
+    public static int WRONG_BOLT_MINUS_SCORE = 1;
+    public static int ENEMY_TOUCHE_BARRIER_MINUS_SCORE = 5;
+    public static int RIGHT_BOLT_ADD_SCORE = 10;
+    public static int CHANGE_WEAPON_MINUS_SCORE = 1;
 }

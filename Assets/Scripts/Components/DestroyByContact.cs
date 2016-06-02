@@ -36,13 +36,13 @@ public class DestroyByContact : MonoBehaviour
                 string question = gameObject.GetComponentInChildren<TextMesh>().text;
                 if (GameController.GetQuestion(answer).Equals(question))
                 {
-                    gameController.AddScore(50);
+                    gameController.AddScore(Constants.RIGHT_BOLT_ADD_SCORE);
                     Destroy(gameObject);
                     Instantiate(enemyExplosion, transform.position, transform.rotation);
                 }
                 else
                 {
-                    gameController.MinusScore(1);
+                    gameController.MinusScore(Constants.WRONG_BOLT_MINUS_SCORE);
                     Instantiate(wrongBulletExplosion, transform.position, transform.rotation);
                 }
             }
@@ -51,7 +51,7 @@ public class DestroyByContact : MonoBehaviour
 
         if (other.tag == "Barrier")
         {
-            gameController.MinusScore(50);
+            gameController.MinusScore(Constants.ENEMY_TOUCHE_BARRIER_MINUS_SCORE);
             Destroy(gameObject);
             Instantiate(enemyExplosion, transform.position, transform.rotation);
         }

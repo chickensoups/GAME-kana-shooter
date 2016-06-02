@@ -97,59 +97,16 @@ public class GameController : MonoBehaviour
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.OpenRead(Application.persistentDataPath + "/playerInfo.dat");
 
-            PlayerData data = (PlayerData) bf.Deserialize(file);
+            PlayerData data = (PlayerData)bf.Deserialize(file);
             file.Close();
             return data;
         }
         return null;
     }
 
-    void Start()
+    private void WeaponChanged(GameObject weapon)
     {
-
-        //init level data
-        LevelUtil.Init();
-        //load saved data
-        PlayerData savedData = Load();
-        if (savedData != null)
-        {
-            //load level and score depend on saved data
-            currentLevel = LevelUtil.GetLevel(savedData.level);
-            nextLevel = LevelUtil.GetLevel(savedData.level + 1);
-            score = savedData.score;
-        }
-        else
-        {
-            //load level and score depend on saved data
-            currentLevel = LevelUtil.GetLevel(1);
-            nextLevel = LevelUtil.GetLevel(2);
-            score = 0;
-        }
-
-        //display welcome message
-        StartCoroutine(DisplayWelcomeMessage());
-        //Update Score first time
-        UpdateScore();
-
-        newWaveCooldown = 0;
-        newWaveCooldownRate = 0.1f;
-        nextNewWaveUpdateTime = Time.time;
-        newWaveCooldownText.text = "";
-        newWaveIsCommingText.text = ""; 
-
-        //init pause/resume button
-        pauseBtn = GameObject.FindGameObjectWithTag("PauseBtn").GetComponent<Button>();
-        pauseBtn.onClick.AddListener(PauseButtonClick);
-        pause = false;
-
-        //init audio sources
-        audios = GetComponents<AudioSource>();
-        bgAudio = audios[0];
-        levelUpAudio = audios[1];
-        levelDownAudio = audios[2];
-
-        //start spawn enemy
-        StartCoroutine(SpawnWave());
+        MinusScore(Constants.CHANGE_WEAPON_MINUS_SCORE);
     }
 
     void PauseButtonClick()
@@ -167,18 +124,6 @@ public class GameController : MonoBehaviour
             bgAudio.volume = 0.0f;
         }
         pause = !pause;
-    }
-
-    void Update()
-    {
-        if (newWaveCooldown > 0)
-        {
-            newWaveCooldown -= Time.deltaTime;
-            if (Time.time > nextNewWaveUpdateTime)
-            {
-                UpdateNewWaveCooldownText();
-            }
-        }
     }
 
     private void UpdateNewWaveCooldownText()
@@ -227,7 +172,7 @@ public class GameController : MonoBehaviour
         score -= scoreToMinus;
         UpdateScore();
     }
-    
+
     private void UpdateScore()
     {
         UpdateScoreText();
@@ -296,6 +241,70 @@ public class GameController : MonoBehaviour
     private void UpdateScoreText()
     {
         scoreText.text = "Score: " + score;
+    }
+
+    void Awake()
+    {
+        WeaponChoosen.WeaponChanged += WeaponChanged;
+    }
+
+    void Start()
+    {
+        //init level data
+        LevelUtil.Init();
+        //load saved data
+        PlayerData savedData = Load();
+        if (savedData != null)
+        {
+            //load level and score depend on saved data
+            currentLevel = LevelUtil.GetLevel(savedData.level);
+            nextLevel = LevelUtil.GetLevel(savedData.level + 1);
+            score = savedData.score;
+        }
+        else
+        {
+            //load level and score depend on saved data
+            currentLevel = LevelUtil.GetLevel(1);
+            nextLevel = LevelUtil.GetLevel(2);
+            score = 0;
+        }
+
+        //display welcome message
+        StartCoroutine(DisplayWelcomeMessage());
+        //Update Score first time
+        UpdateScore();
+
+        newWaveCooldown = 0;
+        newWaveCooldownRate = 0.1f;
+        nextNewWaveUpdateTime = Time.time;
+        newWaveCooldownText.text = "";
+        newWaveIsCommingText.text = "";
+
+        //init pause/resume button
+        pauseBtn = GameObject.FindGameObjectWithTag("PauseBtn").GetComponent<Button>();
+        pauseBtn.onClick.AddListener(PauseButtonClick);
+        pause = false;
+
+        //init audio sources
+        audios = GetComponents<AudioSource>();
+        bgAudio = audios[0];
+        levelUpAudio = audios[1];
+        levelDownAudio = audios[2];
+
+        //start spawn enemy
+        StartCoroutine(SpawnWave());
+    }
+
+    void Update()
+    {
+        if (newWaveCooldown > 0)
+        {
+            newWaveCooldown -= Time.deltaTime;
+            if (Time.time > nextNewWaveUpdateTime)
+            {
+                UpdateNewWaveCooldownText();
+            }
+        }
     }
 
     public void OnApplicationQuit()
