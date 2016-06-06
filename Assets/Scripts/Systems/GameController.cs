@@ -24,8 +24,10 @@ public class GameController : MonoBehaviour
     private float newWaveCooldown;
     private float newWaveCooldownRate;
     private float nextNewWaveUpdateTime;
-    public Text newWaveIsCommingText;
-    public Text newWaveCooldownText;
+
+    public Text newWaveText;
+    private Image newWaveImage;
+    private ProgressBar.ProgressRadialBehaviour newWaveProgress;
 
     public Text welcomeMessageText;
     public Text levelChangeMessage;
@@ -48,7 +50,9 @@ public class GameController : MonoBehaviour
     public GameObject enemyExplosion;
 
     private Button pauseBtn;
-    private bool pause;
+    public static bool pause;
+
+    GameObject[] tutorialGameObjects;
 
     public static string GetQuestion(string answer)
     {
@@ -131,17 +135,18 @@ public class GameController : MonoBehaviour
         pause = !pause;
     }
 
-    private void UpdateNewWaveCooldownText()
+    private void UpdateNewWaveCooldown()
     {
         if (newWaveCooldown <= newWaveCooldownRate)
         {
             newWaveCooldown = 0;
-            newWaveCooldownText.text = "";
-            newWaveIsCommingText.text = "";
+            newWaveText.text = "";
+            newWaveImage.enabled = false;
+            newWaveProgress.Value = 0;
         }
         else
         {
-            newWaveCooldownText.text = "" + Math.Round(newWaveCooldown, 2);
+            newWaveProgress.IncrementValue(100 / (currentLevel.GetWaveWait() / newWaveCooldownRate));
         }
         nextNewWaveUpdateTime += newWaveCooldownRate;
     }
@@ -158,10 +163,12 @@ public class GameController : MonoBehaviour
                 Instantiate(enemy, spawnPosition, spawnRotation);
                 yield return new WaitForSeconds(currentLevel.GetSpawnWait());
             }
-            //set new wave text
-            newWaveIsCommingText.text = "New wave is comming!!!";
+            //set new wave cooldown
             newWaveCooldown = currentLevel.GetWaveWait();
+            newWaveText.text = "New wave is comming!!!";
+            newWaveImage.enabled = true;
             nextNewWaveUpdateTime = Time.time;
+
             yield return new WaitForSeconds(currentLevel.GetWaveWait());
         }
     }
@@ -178,8 +185,27 @@ public class GameController : MonoBehaviour
         UpdateScore();
     }
 
+    private void DisplayTutorial()
+    {
+        if (score < Constants.TUTORIAL_POINT)
+        {
+            for (int i = 0; i < tutorialGameObjects.Length; i++)
+            {
+                tutorialGameObjects[i].SetActive(true);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < tutorialGameObjects.Length; i++)
+            {
+                tutorialGameObjects[i].SetActive(false);
+            }
+        }
+    }
+
     private void UpdateScore()
     {
+        DisplayTutorial();
         UpdateScoreText();
         hint = score < currentLevel.GetHintPoint();
         if (score < currentLevel.GetDownPoint() || score > currentLevel.GetUpPoint())
@@ -274,16 +300,27 @@ public class GameController : MonoBehaviour
             score = 0;
         }
 
+        ////load level and score depend on saved data
+        //currentLevel = LevelUtil.GetLevel(1);
+        //nextLevel = LevelUtil.GetLevel(2);
+        //score = 0;
+        tutorialGameObjects = GameObject.FindGameObjectsWithTag("tutorial");
+
         //display welcome message
         StartCoroutine(DisplayWelcomeMessage());
         //Update Score first time
         UpdateScore();
 
+        //new wave
         newWaveCooldown = 0;
         newWaveCooldownRate = 0.1f;
         nextNewWaveUpdateTime = Time.time;
-        newWaveCooldownText.text = "";
-        newWaveIsCommingText.text = "";
+        newWaveText = GameObject.Find("New wave text").GetComponent<Text>();
+        newWaveText.text = "";
+        newWaveImage = GameObject.Find("New wave image").GetComponent<Image>();
+        newWaveImage.enabled = true;
+        newWaveProgress = newWaveImage.GetComponent<ProgressBar.ProgressRadialBehaviour>();
+        newWaveProgress.Value = 0;
 
         //init pause/resume button
         pauseBtn = GameObject.FindGameObjectWithTag("PauseBtn").GetComponent<Button>();
@@ -307,7 +344,7 @@ public class GameController : MonoBehaviour
             newWaveCooldown -= Time.deltaTime;
             if (Time.time > nextNewWaveUpdateTime)
             {
-                UpdateNewWaveCooldownText();
+                UpdateNewWaveCooldown();
             }
         }
     }

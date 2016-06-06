@@ -5,7 +5,7 @@ public class WeaponChoosen : MonoBehaviour {
 
     void OnMouseDown()
     {
-        if (WeaponController.GetChoosenWeaponName() != GetComponentInChildren<TextMesh>().text)
+        if (WeaponController.GetChoosenWeaponName() != GetComponentInChildren<TextMesh>().text && !GameController.pause)
         {
             if (WeaponChanged != null)
             {

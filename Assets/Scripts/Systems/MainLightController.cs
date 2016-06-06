@@ -37,7 +37,7 @@ public class MainLightController : MonoBehaviour
     public static IEnumerator LightDown()
     {
         float t = 0;
-        while (t < lightUpDuration)
+        while (t < lightDownDuration)
         {
             light1.color = colors[Random.Range(0, colors.Length - 1)];
             t++;

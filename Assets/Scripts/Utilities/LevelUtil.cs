@@ -43,7 +43,7 @@ public class LevelUtil
         waveWait = 5;
         spawnWait = 4;
         isRotate = false;
-        isFaster = true;
+        isFaster = false;
 
         Level level1 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
 
@@ -59,8 +59,8 @@ public class LevelUtil
         enemyEachWaveCount = 5;
         waveWait = 5;
         spawnWait = 4;
-        isRotate = true;
-        isFaster = true;
+        isRotate = false;
+        isFaster = false;
         Level level2 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
 
         //level 3
