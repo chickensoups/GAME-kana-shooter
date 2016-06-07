@@ -17,7 +17,7 @@ public class LevelUtil
         // HRAGANA ZONE
         //level 0
         int index = 0;
-        string name = "Round " + index;
+        string name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         string welcomeMessage = "OMG! Negative point! Trying more!";
         List<string> answer = new List<string>(new[] { "a", "i", "u", "e", "o" });
         List<string> questions = new List<string>(new[] { "あ", "い", "う", "え", "お" });
@@ -34,7 +34,7 @@ public class LevelUtil
 
         //level 1
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         welcomeMessage = "Welcome to Hiragana Zone!";
         downPoint = 0;
         upPoint = 200;
@@ -52,7 +52,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "ka", "ki", "ku", "ke", "ko" });
         questions = new List<string>(new[] { "か", "き", "く", "け", "こ" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 400;
         hintPoint = downPoint + 50;
@@ -68,12 +68,12 @@ public class LevelUtil
         answer = new List<string>(new[] { "a", "i", "u", "e", "o", "ka", "ki", "ku", "ke", "ko" });
         questions = new List<string>(new[] { "あ", "い", "う", "え", "お", "か", "き", "く", "け", "こ" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 700;
         hintPoint = downPoint + 50;
         enemyEachWaveCount = 10;
-        waveWait = 5;
+        waveWait = 4;
         spawnWait = 4;
         isRotate = false;
         isFaster = true;
@@ -82,13 +82,13 @@ public class LevelUtil
         //level 4
         welcomeMessage = "Rolling in the deep!";
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 1000;
         hintPoint = downPoint + 50;
         enemyEachWaveCount = 10;
-        waveWait = 5;
-        spawnWait = 3;
+        waveWait = 4;
+        spawnWait = 4;
         isRotate = true;
         isFaster = true;
         Level level4 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
@@ -98,7 +98,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "sa", "shi", "su", "se", "so" });
         questions = new List<string>(new[] { "さ", "し", "す", "せ", "そ" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 1200;
         hintPoint = downPoint + 50;
@@ -114,7 +114,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "ta", "chi", "tsu", "te", "to" });
         questions = new List<string>(new[] { "た", "ち", "つ", "て", "と" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 1400;
         hintPoint = downPoint + 50;
@@ -130,12 +130,12 @@ public class LevelUtil
         answer = new List<string>(new[] { "sa", "shi", "su", "se", "so", "ta", "chi", "tsu", "te", "to" });
         questions = new List<string>(new[] { "さ", "し", "す", "せ", "そ", "た", "ち", "つ", "て", "と" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 1700;
         hintPoint = downPoint + 50;
         enemyEachWaveCount = 10;
-        waveWait = 5;
+        waveWait = 4;
         spawnWait = 4;
         isRotate = false;
         isFaster = true;
@@ -144,13 +144,13 @@ public class LevelUtil
         //level 8
         welcomeMessage = "You did the right thing. Move on!";
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 2000;
         hintPoint = downPoint + 50;
         enemyEachWaveCount = 4;
-        waveWait = 5;
-        spawnWait = 3;
+        waveWait = 4;
+        spawnWait = 4;
         isRotate = true;
         isFaster = true;
         Level level8 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
@@ -160,12 +160,12 @@ public class LevelUtil
         answer = new List<string>(new[] { "a", "i", "u", "e", "o", "ka", "ki", "ku", "ke", "ko", "sa", "shi", "su", "se", "so", "ta", "chi", "tsu", "te", "to" });
         questions = new List<string>(new[] { "あ", "い", "う", "え", "お", "か", "き", "く", "け", "こ", "さ", "し", "す", "せ", "そ", "た", "ち", "つ", "て", "と" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 2500;
         hintPoint = downPoint + 100;
         enemyEachWaveCount = 12;
-        waveWait = 5;
+        waveWait = 3;
         spawnWait = 4;
         isRotate = false;
         isFaster = true;
@@ -174,13 +174,13 @@ public class LevelUtil
         //level 10
         welcomeMessage = "I like rotate and buff speed so much :D";
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 3000;
         hintPoint = downPoint + 100;
         enemyEachWaveCount = 12;
-        waveWait = 5;
-        spawnWait = 3;
+        waveWait = 3;
+        spawnWait = 4;
         isRotate = true;
         isFaster = true;
         Level level10 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
@@ -190,7 +190,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "na", "ni", "nu", "ne", "no" });
         questions = new List<string>(new[] { "な", "に", "ぬ", "ね", "の" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 3200;
         hintPoint = downPoint + 50;
@@ -206,7 +206,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "ha", "hi", "fu", "he", "ho" });
         questions = new List<string>(new[] { "は", "ひ", "ふ", "へ", "ほ" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 3400;
         hintPoint = downPoint + 50;
@@ -222,12 +222,12 @@ public class LevelUtil
         answer = new List<string>(new[] { "na", "ni", "nu", "ne", "no", "ha", "hi", "fu", "he", "ho" });
         questions = new List<string>(new[] { "な", "に", "ぬ", "ね", "の", "は", "ひ", "ふ", "へ", "ほ" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 3700;
         hintPoint = downPoint + 50;
         enemyEachWaveCount = 10;
-        waveWait = 5;
+        waveWait = 4;
         spawnWait = 4;
         isRotate = false;
         isFaster = true;
@@ -236,12 +236,12 @@ public class LevelUtil
         //level 14
         welcomeMessage = "Rolling in the deeperrrr!!";
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 4000;
         hintPoint = downPoint + 50;
         enemyEachWaveCount = 10;
-        waveWait = 5;
+        waveWait = 4;
         spawnWait = 4;
         isRotate = true;
         isFaster = true;
@@ -252,7 +252,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "ma", "mi", "mu", "me", "mo" });
         questions = new List<string>(new[] { "ま", "み", "む", "め", "も" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 4200;
         hintPoint = downPoint + 50;
@@ -268,7 +268,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "ra", "ri", "ru", "re", "ro" });
         questions = new List<string>(new[] { "ら", "り", "る", "れ", "ろ" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 4400;
         hintPoint = downPoint + 50;
@@ -284,12 +284,12 @@ public class LevelUtil
         answer = new List<string>(new[] { "ma", "mi", "mu", "me", "mo", "ra", "ri", "ru", "re", "ro" });
         questions = new List<string>(new[] { "ま", "み", "む", "め", "も", "ら", "り", "る", "れ", "ろ" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 4700;
         hintPoint = downPoint + 50;
         enemyEachWaveCount = 10;
-        waveWait = 5;
+        waveWait = 4;
         spawnWait = 4;
         isRotate = false;
         isFaster = true;
@@ -298,13 +298,13 @@ public class LevelUtil
         //level 18
         welcomeMessage = "Mixing, rolling, running T_T";
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 5000;
         hintPoint = downPoint + 50;
         enemyEachWaveCount = 10;
-        waveWait = 5;
-        spawnWait = 3;
+        waveWait = 4;
+        spawnWait = 4;
         isRotate = true;
         isFaster = true;
         Level level18 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
@@ -314,12 +314,12 @@ public class LevelUtil
         answer = new List<string>(new[] { "na", "ni", "nu", "ne", "no", "ha", "hi", "fu", "he", "ho", "ma", "mi", "mu", "me", "mo", "ra", "ri", "ru", "re", "ro" });
         questions = new List<string>(new[] { "な", "に", "ぬ", "ね", "の", "は", "ひ", "ふ", "へ", "ほ", "ま", "み", "む", "め", "も", "ら", "り", "る", "れ", "ろ" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 5500;
         hintPoint = downPoint + 50;
         enemyEachWaveCount = 12;
-        waveWait = 5;
+        waveWait = 3;
         spawnWait = 4;
         isRotate = false;
         isFaster = true;
@@ -328,12 +328,12 @@ public class LevelUtil
         //level 20
         welcomeMessage = "YTTOR, GNIHTON OT ETIRW EREH";
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 6000;
         hintPoint = downPoint + 50;
         enemyEachWaveCount = 12;
-        waveWait = 5;
+        waveWait = 3;
         spawnWait = 4;
         isRotate = true;
         isFaster = true;
@@ -344,7 +344,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "ya", "yu", "yo" });
         questions = new List<string>(new[] { "や", "ゆ", "よ" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 6200;
         hintPoint = downPoint + 50;
@@ -360,7 +360,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "wa", "wo", "n" });
         questions = new List<string>(new[] { "わ", "を", "ん" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 6400;
         hintPoint = downPoint + 50;
@@ -376,12 +376,12 @@ public class LevelUtil
         answer = new List<string>(new[] { "ya", "yu", "yo", "wa", "wo", "n" });
         questions = new List<string>(new[] { "や", "ゆ", "よ", "わ", "を", "ん" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 6700;
         hintPoint = downPoint + 50;
         enemyEachWaveCount = 10;
-        waveWait = 5;
+        waveWait = 4;
         spawnWait = 4;
         isRotate = false;
         isFaster = true;
@@ -390,12 +390,12 @@ public class LevelUtil
         //level 24
         welcomeMessage = "Try your best! You almost reach awesome point!";
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 7000;
         hintPoint = downPoint + 50;
         enemyEachWaveCount = 10;
-        waveWait = 5;
+        waveWait = 4;
         spawnWait = 4;
         isRotate = true;
         isFaster = true;
@@ -406,13 +406,13 @@ public class LevelUtil
         answer = new List<string>(new[] { "a", "i", "u", "e", "o", "ka", "ki", "ku", "ke", "ko", "sa", "shi", "su", "se", "so", "ta", "chi", "tsu", "te", "to", "na", "ni", "nu", "ne", "no", "ha", "hi", "fu", "he", "ho", "ma", "mi", "mu", "me", "mo", "ra", "ri", "ru", "re", "ro", "ya", "yu", "yo", "wa", "wo", "n" });
         questions = new List<string>(new[] { "あ", "い", "う", "え", "お", "か", "き", "く", "け", "こ", "さ", "し", "す", "せ", "そ", "た", "ち", "つ", "て", "と", "な", "に", "ぬ", "ね", "の", "は", "ひ", "ふ", "へ", "ほ", "ま", "み", "む", "め", "も", "ら", "り", "る", "れ", "ろ", "や", "ゆ", "よ", "わ", "を", "ん" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 8500;
         hintPoint = downPoint + 100;
         enemyEachWaveCount = 15;
-        waveWait = 4;
-        spawnWait = 3;
+        waveWait = 3;
+        spawnWait = 4;
         isRotate = false;
         isFaster = true;
         Level level25 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
@@ -420,12 +420,12 @@ public class LevelUtil
         //level 26, hiragana final
         welcomeMessage = "Last round of Hiragana Zone!";
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 10000;
         hintPoint = downPoint + 100;
         enemyEachWaveCount = 4;
-        waveWait = 5;
+        waveWait = 3;
         spawnWait = 4;
         isRotate = true;
         isFaster = true;
@@ -436,7 +436,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "a", "i", "u", "e", "o" });
         questions = new List<string>(new[] { "ア", "イ", "ウ", "エ", "オ" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         welcomeMessage = "Welcome to KATAKANA Zone!";
         downPoint = upPoint;
         upPoint = 10200;
@@ -454,7 +454,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "ka", "ki", "ku", "ke", "ko" });
         questions = new List<string>(new[] { "カ", "キ", "ク", "ケ", "コ" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 10400;
         hintPoint = downPoint + 50;
@@ -470,12 +470,12 @@ public class LevelUtil
         answer = new List<string>(new[] { "a", "i", "u", "e", "o", "ka", "ki", "ku", "ke", "ko" });
         questions = new List<string>(new[] { "ア", "イ", "ウ", "エ", "オ", "カ", "キ", "ク", "ケ", "コ" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 10700;
         hintPoint = downPoint + 50;
         enemyEachWaveCount = 10;
-        waveWait = 5;
+        waveWait = 4;
         spawnWait = 4;
         isRotate = false;
         isFaster = true;
@@ -484,13 +484,13 @@ public class LevelUtil
         //level 30
         welcomeMessage = "Rolling in the deep!";
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 11000;
         hintPoint = downPoint + 50;
         enemyEachWaveCount = 10;
-        waveWait = 5;
-        spawnWait = 3;
+        waveWait = 4;
+        spawnWait = 4;
         isRotate = true;
         isFaster = true;
         Level level30 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
@@ -500,7 +500,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "sa", "shi", "su", "se", "so" });
         questions = new List<string>(new[] { "サ", "シ", "ス", "セ", "ソ" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 11200;
         hintPoint = downPoint + 50;
@@ -516,7 +516,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "ta", "chi", "tsu", "te", "to" });
         questions = new List<string>(new[] { "タ", "チ", "ツ", "テ", "ト" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 11400;
         hintPoint = downPoint + 50;
@@ -532,12 +532,12 @@ public class LevelUtil
         answer = new List<string>(new[] { "sa", "shi", "su", "se", "so", "ta", "chi", "tsu", "te", "to" });
         questions = new List<string>(new[] { "サ", "シ", "ス", "セ", "ソ", "タ", "チ", "ツ", "テ", "ト" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 11700;
         hintPoint = downPoint + 50;
         enemyEachWaveCount = 10;
-        waveWait = 5;
+        waveWait = 4;
         spawnWait = 4;
         isRotate = false;
         isFaster = true;
@@ -546,13 +546,13 @@ public class LevelUtil
         //level 34
         welcomeMessage = "You did the right thing. Move on!";
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 12000;
         hintPoint = downPoint + 50;
         enemyEachWaveCount = 4;
-        waveWait = 5;
-        spawnWait = 3;
+        waveWait = 4;
+        spawnWait = 4;
         isRotate = true;
         isFaster = true;
         Level level34 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
@@ -562,12 +562,12 @@ public class LevelUtil
         answer = new List<string>(new[] { "a", "i", "u", "e", "o", "ka", "ki", "ku", "ke", "ko", "sa", "shi", "su", "se", "so", "ta", "chi", "tsu", "te", "to" });
         questions = new List<string>(new[] { "ア", "イ", "ウ", "エ", "オ", "カ", "キ", "ク", "ケ", "コ", "サ", "シ", "ス", "セ", "ソ", "タ", "チ", "ツ", "テ", "ト" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 12500;
         hintPoint = downPoint + 100;
         enemyEachWaveCount = 12;
-        waveWait = 5;
+        waveWait = 3;
         spawnWait = 4;
         isRotate = false;
         isFaster = true;
@@ -576,13 +576,13 @@ public class LevelUtil
         //level 36
         welcomeMessage = "I like rotate and buff speed so much :D";
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 13000;
         hintPoint = downPoint + 100;
         enemyEachWaveCount = 12;
-        waveWait = 5;
-        spawnWait = 3;
+        waveWait = 3;
+        spawnWait = 4;
         isRotate = true;
         isFaster = true;
         Level level36 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
@@ -592,7 +592,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "na", "ni", "nu", "ne", "no" });
         questions = new List<string>(new[] { "ナ", "ニ", "ヌ", "ネ", "ノ" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 13200;
         hintPoint = downPoint + 50;
@@ -608,7 +608,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "ha", "hi", "fu", "he", "ho" });
         questions = new List<string>(new[] { "ハ", "ヒ", "フ", "ヘ", "ホ" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 13400;
         hintPoint = downPoint + 50;
@@ -624,12 +624,12 @@ public class LevelUtil
         answer = new List<string>(new[] { "na", "ni", "nu", "ne", "no", "ha", "hi", "fu", "he", "ho" });
         questions = new List<string>(new[] { "ナ", "ニ", "ヌ", "ネ", "ノ", "ハ", "ヒ", "フ", "ヘ", "ホ" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 13700;
         hintPoint = downPoint + 50;
         enemyEachWaveCount = 10;
-        waveWait = 5;
+        waveWait = 4;
         spawnWait = 4;
         isRotate = false;
         isFaster = true;
@@ -638,12 +638,12 @@ public class LevelUtil
         //level 40
         welcomeMessage = "Rolling in the deeperrrr!!";
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 14000;
         hintPoint = downPoint + 50;
         enemyEachWaveCount = 10;
-        waveWait = 5;
+        waveWait = 4;
         spawnWait = 4;
         isRotate = true;
         isFaster = true;
@@ -654,7 +654,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "ma", "mi", "mu", "me", "mo" });
         questions = new List<string>(new[] { "マ", "ミ", "ム", "メ", "モ" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 14200;
         hintPoint = downPoint + 50;
@@ -670,7 +670,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "ra", "ri", "ru", "re", "ro" });
         questions = new List<string>(new[] { "ラ", "リ", "ル", "レ", "ロ" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 14400;
         hintPoint = downPoint + 50;
@@ -686,12 +686,12 @@ public class LevelUtil
         answer = new List<string>(new[] { "ma", "mi", "mu", "me", "mo", "ra", "ri", "ru", "re", "ro" });
         questions = new List<string>(new[] { "マ", "ミ", "ム", "メ", "モ", "ラ", "リ", "ル", "レ", "ロ" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 14700;
         hintPoint = downPoint + 50;
         enemyEachWaveCount = 10;
-        waveWait = 5;
+        waveWait = 4;
         spawnWait = 4;
         isRotate = false;
         isFaster = true;
@@ -700,13 +700,13 @@ public class LevelUtil
         //level 44
         welcomeMessage = "Mixing, rolling, running T_T";
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 15000;
         hintPoint = downPoint + 50;
         enemyEachWaveCount = 10;
-        waveWait = 5;
-        spawnWait = 3;
+        waveWait = 4;
+        spawnWait = 4;
         isRotate = true;
         isFaster = true;
         Level level44 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
@@ -716,12 +716,12 @@ public class LevelUtil
         answer = new List<string>(new[] { "na", "ni", "nu", "ne", "no", "ha", "hi", "fu", "he", "ho", "ma", "mi", "mu", "me", "mo", "ra", "ri", "ru", "re", "ro" });
         questions = new List<string>(new[] { "ナ", "ニ", "ヌ", "ネ", "ノ", "ハ", "ヒ", "フ", "ヘ", "ホ", "マ", "ミ", "ム", "メ", "モ", "ラ", "リ", "ル", "レ", "ロ" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 15500;
         hintPoint = downPoint + 50;
         enemyEachWaveCount = 12;
-        waveWait = 5;
+        waveWait = 3;
         spawnWait = 4;
         isRotate = false;
         isFaster = true;
@@ -730,12 +730,12 @@ public class LevelUtil
         //level 46
         welcomeMessage = "YTTOR, GNIHTON OT ETIRW EREH";
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 16000;
         hintPoint = downPoint + 50;
         enemyEachWaveCount = 12;
-        waveWait = 5;
+        waveWait = 3;
         spawnWait = 4;
         isRotate = true;
         isFaster = true;
@@ -746,7 +746,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "ya", "yu", "yo" });
         questions = new List<string>(new[] { "ヤ", "ユ", "ヨ" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 16200;
         hintPoint = downPoint + 50;
@@ -762,7 +762,7 @@ public class LevelUtil
         answer = new List<string>(new[] { "wa", "wo", "n" });
         questions = new List<string>(new[] { "ワ", "ヲ", "ン" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 16400;
         hintPoint = downPoint + 50;
@@ -778,12 +778,12 @@ public class LevelUtil
         answer = new List<string>(new[] { "ya", "yu", "yo", "wa", "wo", "n" });
         questions = new List<string>(new[] { "ヤ", "ユ", "ヨ", "ワ", "ヲ", "ン" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 16700;
         hintPoint = downPoint + 50;
         enemyEachWaveCount = 10;
-        waveWait = 5;
+        waveWait = 4;
         spawnWait = 4;
         isRotate = false;
         isFaster = true;
@@ -792,12 +792,12 @@ public class LevelUtil
         //level 50
         welcomeMessage = "Try your best! You almost reach awesome point!";
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 17000;
         hintPoint = downPoint + 50;
         enemyEachWaveCount = 10;
-        waveWait = 5;
+        waveWait = 4;
         spawnWait = 4;
         isRotate = true;
         isFaster = true;
@@ -808,13 +808,13 @@ public class LevelUtil
         answer = new List<string>(new[] { "a", "i", "u", "e", "o", "ka", "ki", "ku", "ke", "ko", "sa", "shi", "su", "se", "so", "ta", "chi", "tsu", "te", "to", "na", "ni", "nu", "ne", "no", "ha", "hi", "fu", "he", "ho", "ma", "mi", "mu", "me", "mo", "ra", "ri", "ru", "re", "ro", "ya", "yu", "yo", "wa", "wo", "n" });
         questions = new List<string>(new[] { "ア", "イ", "ウ", "エ", "オ", "カ", "キ", "ク", "ケ", "コ", "サ", "シ", "ス", "セ", "ソ", "タ", "チ", "ツ", "テ", "ト", "ナ", "ニ", "ヌ", "ネ", "ノ", "ハ", "ヒ", "フ", "ヘ", "ホ", "マ", "ミ", "ム", "メ", "モ", "ラ", "リ", "ル", "レ", "ロ", "ヤ", "ユ", "ヨ", "ワ", "ヲ", "ン" });
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 18500;
         hintPoint = downPoint + 100;
         enemyEachWaveCount = 15;
-        waveWait = 4;
-        spawnWait = 3;
+        waveWait = 3;
+        spawnWait = 4;
         isRotate = false;
         isFaster = true;
         Level level51 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
@@ -822,17 +822,65 @@ public class LevelUtil
         //level 52, katakana final
         welcomeMessage = "Try to beat last round of KATAKANA!";
         index += 1;
-        name = "Round " + index;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
         downPoint = upPoint;
         upPoint = 20000;
         hintPoint = downPoint + 100;
-        enemyEachWaveCount = 4;
-        waveWait = 5;
+        enemyEachWaveCount = 15;
+        waveWait = 3;
         spawnWait = 4;
         isRotate = true;
         isFaster = true;
         Level level52 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
 
+        //level 53
+        welcomeMessage = "Hiragana + Katakana!! How possible?";
+        answer = new List<string>(new[] { "a", "i", "u", "e", "o", "ka", "ki", "ku", "ke", "ko", "sa", "shi", "su", "se", "so", "ta", "chi", "tsu", "te", "to", "na", "ni", "nu", "ne", "no", "ha", "hi", "fu", "he", "ho", "ma", "mi", "mu", "me", "mo", "ra", "ri", "ru", "re", "ro", "ya", "yu", "yo", "wa", "wo", "n", "a", "i", "u", "e", "o", "ka", "ki", "ku", "ke", "ko", "sa", "shi", "su", "se", "so", "ta", "chi", "tsu", "te", "to", "na", "ni", "nu", "ne", "no", "ha", "hi", "fu", "he", "ho", "ma", "mi", "mu", "me", "mo", "ra", "ri", "ru", "re", "ro", "ya", "yu", "yo", "wa", "wo", "n" });
+        questions = new List<string>(new[] { "あ", "い", "う", "え", "お", "か", "き", "く", "け", "こ", "さ", "し", "す", "せ", "そ", "た", "ち", "つ", "て", "と", "な", "に", "ぬ", "ね", "の", "は", "ひ", "ふ", "へ", "ほ", "ま", "み", "む", "め", "も", "ら", "り", "る", "れ", "ろ", "や", "ゆ", "よ", "わ", "を", "ん", "ア", "イ", "ウ", "エ", "オ", "カ", "キ", "ク", "ケ", "コ", "サ", "シ", "ス", "セ", "ソ", "タ", "チ", "ツ", "テ", "ト", "ナ", "ニ", "ヌ", "ネ", "ノ", "ハ", "ヒ", "フ", "ヘ", "ホ", "マ", "ミ", "ム", "メ", "モ", "ラ", "リ", "ル", "レ", "ロ", "ヤ", "ユ", "ヨ", "ワ", "ヲ", "ン" });
+        index += 1;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
+        downPoint = upPoint;
+        upPoint = 22000;
+        hintPoint = downPoint + 100;
+        enemyEachWaveCount = 15;
+        waveWait = 4;
+        spawnWait = 3;
+        isRotate = true;
+        isFaster = true;
+        Level level53 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
+
+        //level 54
+        welcomeMessage = "HIRAGA vs KATAKANA";
+        answer = new List<string>(new[] { "あ", "い", "う", "え", "お", "か", "き", "く", "け", "こ", "さ", "し", "す", "せ", "そ", "た", "ち", "つ", "て", "と", "な", "に", "ぬ", "ね", "の", "は", "ひ", "ふ", "へ", "ほ", "ま", "み", "む", "め", "も", "ら", "り", "る", "れ", "ろ", "や", "ゆ", "よ", "わ", "を", "ん" });
+        questions = new List<string>(new[] {"ア", "イ", "ウ", "エ", "オ", "カ", "キ", "ク", "ケ", "コ", "サ", "シ", "ス", "セ", "ソ", "タ", "チ", "ツ", "テ", "ト", "ナ", "ニ", "ヌ", "ネ", "ノ", "ハ", "ヒ", "フ", "ヘ", "ホ", "マ", "ミ", "ム", "メ", "モ", "ラ", "リ", "ル", "レ", "ロ", "ヤ", "ユ", "ヨ", "ワ", "ヲ", "ン" });
+        index += 1;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
+        downPoint = upPoint;
+        upPoint = 25000;
+        hintPoint = downPoint + 100;
+        enemyEachWaveCount = 20;
+        waveWait = 3;
+        spawnWait = 3;
+        isRotate = true;
+        isFaster = true;
+        Level level54 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
+
+        //level 55
+        welcomeMessage = "Ohayo Kana master!";
+        questions = new List<string>(new[] { "あ", "い", "う", "え", "お", "か", "き", "く", "け", "こ", "さ", "し", "す", "せ", "そ", "た", "ち", "つ", "て", "と", "な", "に", "ぬ", "ね", "の", "は", "ひ", "ふ", "へ", "ほ", "ま", "み", "む", "め", "も", "ら", "り", "る", "れ", "ろ", "や", "ゆ", "よ", "わ", "を", "ん" });
+        answer = new List<string>(new[] { "ア", "イ", "ウ", "エ", "オ", "カ", "キ", "ク", "ケ", "コ", "サ", "シ", "ス", "セ", "ソ", "タ", "チ", "ツ", "テ", "ト", "ナ", "ニ", "ヌ", "ネ", "ノ", "ハ", "ヒ", "フ", "ヘ", "ホ", "マ", "ミ", "ム", "メ", "モ", "ラ", "リ", "ル", "レ", "ロ", "ヤ", "ユ", "ヨ", "ワ", "ヲ", "ン" });
+        index += 1;
+        name = "Round " + index + "/" + Constants.TOTAL_ROUND;
+        downPoint = upPoint;
+        upPoint = 1000000;
+        hintPoint = downPoint + 100;
+        enemyEachWaveCount = 20;
+        waveWait = 3;
+        spawnWait = 3;
+        isRotate = true;
+        isFaster = true;
+        Level level55 = new Level(index, name, welcomeMessage, questions, answer, downPoint, upPoint, hintPoint, enemyEachWaveCount, waveWait, spawnWait, isRotate, isFaster);
+        
         //push all level to levels
         levels =
             new List<Level>(new Level[]
@@ -841,7 +889,7 @@ public class LevelUtil
                 level12, level13,
                 level14, level15, level16, level17, level18, level19, level20, level21, level22, level23, level24,
                 level25, level26, level27, level28, level29, level30, level31, level32, level33, level34, level35,
-                level36, level37, level38, level39, level40, level41, level42, level43, level44, level45, level46, level47, level48, level49, level50, level51, level52 });
+                level36, level37, level38, level39, level40, level41, level42, level43, level44, level45, level46, level47, level48, level49, level50, level51, level52, level53, level54, level55 });
     }
 
 

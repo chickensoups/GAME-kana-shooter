@@ -131,13 +131,14 @@ public class GameController : MonoBehaviour
             pauseBtn.GetComponentInParent<Image>().sprite = resumeBtnImg;
             Time.timeScale = 0;
             bgAudio.volume = 0.0f;
+            MinusScore(Constants.PAUSE_MINUS_SCORE);
         }
         pause = !pause;
     }
 
     private void UpdateNewWaveCooldown()
     {
-        if (newWaveCooldown <= newWaveCooldownRate)
+        if (newWaveCooldown < 0)
         {
             newWaveCooldown = 0;
             newWaveText.text = "";
@@ -187,7 +188,7 @@ public class GameController : MonoBehaviour
 
     private void DisplayTutorial()
     {
-        if (score < Constants.TUTORIAL_POINT)
+        if (score > -Constants.TUTORIAL_POINT && score < Constants.TUTORIAL_POINT)
         {
             for (int i = 0; i < tutorialGameObjects.Length; i++)
             {
@@ -235,6 +236,10 @@ public class GameController : MonoBehaviour
                 StartCoroutine(DisplayLevelUpDownMessage("Great, Round up!"));
                 //audio when level up
                 levelUpAudio.Play();
+                if (currentLevel.GetIndex() == Constants.TOTAL_ROUND)
+                {
+                    //display congratulation message when player become Kana master
+                }
             }
             Save();
             //display welcome message
@@ -335,6 +340,8 @@ public class GameController : MonoBehaviour
 
         //start spawn enemy
         StartCoroutine(SpawnWave());
+
+        GoogleAdsController.RequestBanner();
     }
 
     void Update()
