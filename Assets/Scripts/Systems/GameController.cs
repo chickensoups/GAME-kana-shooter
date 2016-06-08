@@ -131,7 +131,6 @@ public class GameController : MonoBehaviour
             pauseBtn.GetComponentInParent<Image>().sprite = resumeBtnImg;
             Time.timeScale = 0;
             bgAudio.volume = 0.0f;
-            MinusScore(Constants.PAUSE_MINUS_SCORE);
         }
         pause = !pause;
     }
@@ -369,6 +368,14 @@ public class GameController : MonoBehaviour
     public void OnApplication()
     {
         pause = false;
+    }
+
+    public void OnApplicationFocus(bool focusStatus)
+    {
+        if (!focusStatus)
+        {
+            Save();
+        }
     }
 
 }

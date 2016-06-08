@@ -14,7 +14,7 @@ public class GoogleAdsController
         #endif
 
         // Create a 320x50 banner at the top of the screen.
-        BannerView bannerView = new BannerView(adUnitId, AdSize.Banner, AdPosition.Top);
+        BannerView bannerView = new BannerView(adUnitId, AdSize.SmartBanner, AdPosition.Top);
         AdRequest request = new AdRequest.Builder().Build();
         //// Create an empty ad request.
         //AdRequest request = new AdRequest.Builder()
