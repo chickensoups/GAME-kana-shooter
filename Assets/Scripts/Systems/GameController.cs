@@ -233,6 +233,10 @@ public class GameController : MonoBehaviour
                 //animation when level up
                 StartCoroutine(MainLightController.LightUp());
                 StartCoroutine(DisplayLevelUpDownMessage("Great, Round up!"));
+                //add score
+                AddScore(Constants.LEVEL_UP_BONUS_SCORE);
+                GameObject scoreTextAnimation = (GameObject)Instantiate(scoreAnimationText, new Vector3(0,0,0), Quaternion.identity);
+                scoreTextAnimation.GetComponentInChildren<TextMesh>().text = "+" + Constants.LEVEL_UP_BONUS_SCORE;
                 //audio when level up
                 levelUpAudio.Play();
                 if (currentLevel.GetIndex() == Constants.TOTAL_ROUND)

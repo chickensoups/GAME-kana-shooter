@@ -11,4 +11,5 @@ public class Constants : MonoBehaviour
     public static int TUTORIAL_POINT = 30;
     public static int TOTAL_ROUND = 55;
     public static int TOTAL_POINT = 25000;
+    public static int LEVEL_UP_BONUS_SCORE = 30;
 }
