@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
             bolt.GetComponentInChildren<TextMesh>().text =
                 WeaponController.GetChoosenWeaponName();
             Instantiate(bolt, boltSpawn.transform.position, boltSpawn.transform.rotation);
-            GetComponent<AudioSource>().Play();
+            //GetComponent<AudioSource>().Play();
         }
     }
 
