@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using System.Collections;
+﻿using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class EnemyController : MonoBehaviour

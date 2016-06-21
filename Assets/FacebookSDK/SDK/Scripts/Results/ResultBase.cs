@@ -21,24 +21,32 @@
 namespace Facebook.Unity
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
 
     internal abstract class ResultBase : IInternalResult
     {
-        internal const long CancelDialogCode = 4201;
-        internal const string ErrorCodeKey = "error_code";
-        internal const string ErrorMessageKey = "error_message";
-
-        internal ResultBase(ResultContainer result)
+        internal ResultBase(string result)
         {
-            string error = ResultBase.GetErrorValue(result.ResultDictionary);
-            bool cancelled = ResultBase.GetCancelledValue(result.ResultDictionary);
-            string callbackId = ResultBase.GetCallbackId(result.ResultDictionary);
+            string error = null;
+            bool cancelled = false;
+            string callbackId = null;
+            if (!string.IsNullOrEmpty(result))
+            {
+                var dictionary = Facebook.MiniJSON.Json.Deserialize(result) as Dictionary<string, object>;
+                if (dictionary != null)
+                {
+                    this.ResultDictionary = dictionary;
+                    error = ResultBase.GetErrorValue(dictionary);
+                    cancelled = ResultBase.GetCancelledValue(dictionary);
+                    callbackId = ResultBase.GetCallbackId(dictionary);
+                }
+            }
 
             this.Init(result, error, cancelled, callbackId);
         }
 
-        internal ResultBase(ResultContainer result, string error, bool cancelled)
+        internal ResultBase(string result, string error, bool cancelled)
         {
             this.Init(result, error, cancelled, null);
         }
@@ -53,47 +61,22 @@ namespace Facebook.Unity
 
         public virtual string CallbackId { get; protected set; }
 
-        protected long? CanvasErrorCode { get; private set; }
-
         public override string ToString()
         {
-            return Utilities.FormatToString(
-                base.ToString(),
-                this.GetType().Name,
-                new Dictionary<string, string>()
-                {
-                    { "Error", this.Error },
-                    { "RawResult", this.RawResult },
-                    { "Cancelled", this.Cancelled.ToString() },
-                });
+            return string.Format(
+                "[BaseResult: Error={0}, Result={1}, RawResult={2}, Cancelled={3}]",
+                this.Error,
+                this.ResultDictionary,
+                this.RawResult,
+                this.Cancelled);
         }
 
-        protected void Init(ResultContainer result, string error, bool cancelled, string callbackId)
+        protected void Init(string result, string error, bool cancelled, string callbackId)
         {
-            this.RawResult = result.RawResult;
-            this.ResultDictionary = result.ResultDictionary;
+            this.RawResult = result;
             this.Cancelled = cancelled;
             this.Error = error;
             this.CallbackId = callbackId;
-
-            if (this.ResultDictionary != null)
-            {
-                long errorCode;
-                if (this.ResultDictionary.TryGetValue(ResultBase.ErrorCodeKey, out errorCode))
-                {
-                    this.CanvasErrorCode = errorCode;
-                    if (errorCode == ResultBase.CancelDialogCode)
-                    {
-                        this.Cancelled = true;
-                    }
-                }
-
-                string errorMessage;
-                if (this.ResultDictionary.TryGetValue(ResultBase.ErrorMessageKey, out errorMessage))
-                {
-                    this.Error = errorMessage;
-                }
-            }
         }
 
         private static string GetErrorValue(IDictionary<string, object> result)

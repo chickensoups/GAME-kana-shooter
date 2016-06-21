@@ -23,6 +23,7 @@ namespace Facebook.Unity.Mobile.IOS
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.InteropServices;
 
     internal class IOSFacebook : MobileFacebook
     {
@@ -43,14 +44,7 @@ namespace Facebook.Unity.Mobile.IOS
 
         public enum FBInsightsFlushBehavior
         {
-            /// <summary>
-            /// The FB insights flush behavior auto.
-            /// </summary>
             FBInsightsFlushBehaviorAuto,
-
-            /// <summary>
-            /// The FB insights flush behavior explicit only.
-            /// </summary>
             FBInsightsFlushBehaviorExplicitOnly,
         }
 
@@ -271,7 +265,7 @@ namespace Facebook.Unity.Mobile.IOS
 
         public override void ActivateApp(string appId)
         {
-            // Activate app is logged automatically on ios.
+            this.iosWrapper.FBSettingsActivateApp(appId);
         }
 
         public override void FetchDeferredAppLink(FacebookDelegate<IAppLinkResult> callback)

@@ -20,10 +20,12 @@
 
 namespace UnityEditor.FacebookEditor
 {
+    using System;
     using System.IO;
     using Facebook.Unity;
     using UnityEditor;
     using UnityEditor.Callbacks;
+    using UnityEditor.FacebookEditor;
     using UnityEngine;
 
     public static class XCodePostProcess

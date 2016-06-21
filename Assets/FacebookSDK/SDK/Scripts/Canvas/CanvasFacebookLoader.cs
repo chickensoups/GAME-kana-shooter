@@ -20,6 +20,9 @@
 
 namespace Facebook.Unity.Canvas
 {
+    using System.Collections;
+    using UnityEngine;
+
     internal class CanvasFacebookLoader : FB.CompiledFacebookLoader
     {
         protected override FacebookGameObject FBGameObject

@@ -22,9 +22,10 @@ namespace Facebook.Unity.Mobile
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
-    /// Classes defined on the mobile sdks.
+    /// Classes defined on the mobile sdks
     /// </summary>
     internal abstract class MobileFacebook : FacebookBase, IMobileFacebookImplementation
     {
@@ -64,57 +65,57 @@ namespace Facebook.Unity.Mobile
         public abstract void RefreshCurrentAccessToken(
             FacebookDelegate<IAccessTokenRefreshResult> callback);
 
-        public override void OnLoginComplete(ResultContainer resultContainer)
+        public override void OnLoginComplete(string message)
         {
-            var result = new LoginResult(resultContainer);
+            var result = new LoginResult(message);
             this.OnAuthResponse(result);
         }
 
-        public override void OnGetAppLinkComplete(ResultContainer resultContainer)
+        public override void OnGetAppLinkComplete(string message)
         {
-            var result = new AppLinkResult(resultContainer);
+            var result = new AppLinkResult(message);
             CallbackManager.OnFacebookResponse(result);
         }
 
-        public override void OnGroupCreateComplete(ResultContainer resultContainer)
+        public override void OnGroupCreateComplete(string message)
         {
-            var result = new GroupCreateResult(resultContainer);
+            var result = new GroupCreateResult(message);
             CallbackManager.OnFacebookResponse(result);
         }
 
-        public override void OnGroupJoinComplete(ResultContainer resultContainer)
+        public override void OnGroupJoinComplete(string message)
         {
-            var result = new GroupJoinResult(resultContainer);
+            var result = new GroupJoinResult(message);
             CallbackManager.OnFacebookResponse(result);
         }
 
-        public override void OnAppRequestsComplete(ResultContainer resultContainer)
+        public override void OnAppRequestsComplete(string message)
         {
-            var result = new AppRequestResult(resultContainer);
+            var result = new AppRequestResult(message);
             CallbackManager.OnFacebookResponse(result);
         }
 
-        public void OnAppInviteComplete(ResultContainer resultContainer)
+        public void OnAppInviteComplete(string message)
         {
-            var result = new AppInviteResult(resultContainer);
+            var result = new AppInviteResult(message);
             CallbackManager.OnFacebookResponse(result);
         }
 
-        public void OnFetchDeferredAppLinkComplete(ResultContainer resultContainer)
+        public void OnFetchDeferredAppLinkComplete(string message)
         {
-            var result = new AppLinkResult(resultContainer);
+            var result = new AppLinkResult(message);
             CallbackManager.OnFacebookResponse(result);
         }
 
-        public override void OnShareLinkComplete(ResultContainer resultContainer)
+        public override void OnShareLinkComplete(string message)
         {
-            var result = new ShareResult(resultContainer);
+            var result = new ShareResult(message);
             CallbackManager.OnFacebookResponse(result);
         }
 
-        public void OnRefreshCurrentAccessTokenComplete(ResultContainer resultContainer)
+        public void OnRefreshCurrentAccessTokenComplete(string message)
         {
-            var result = new AccessTokenRefreshResult(resultContainer);
+            var result = new AccessTokenRefreshResult(message);
             if (result.AccessToken != null)
             {
                 AccessToken.CurrentAccessToken = result.AccessToken;

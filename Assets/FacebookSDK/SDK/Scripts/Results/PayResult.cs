@@ -20,37 +20,10 @@
 
 namespace Facebook.Unity
 {
-    using System.Collections.Generic;
-
     internal class PayResult : ResultBase, IPayResult
     {
-        internal const long CancelPaymentFlowCode = 1383010;
-
-        internal PayResult(ResultContainer resultContainer) : base(resultContainer)
+        internal PayResult(string result) : base(result)
         {
-            if (this.CanvasErrorCode != null && this.CanvasErrorCode.Value == PayResult.CancelPaymentFlowCode)
-            {
-                this.Cancelled = true;
-            }
-        }
-
-        public long ErrorCode
-        {
-            get
-            {
-                return this.CanvasErrorCode.GetValueOrDefault();
-            }
-        }
-
-        public override string ToString()
-        {
-            return Utilities.FormatToString(
-                base.ToString(),
-                this.GetType().Name,
-                new Dictionary<string, string>()
-                {
-                    { "ErrorCode", this.ErrorCode.ToString() },
-                });
         }
     }
 }

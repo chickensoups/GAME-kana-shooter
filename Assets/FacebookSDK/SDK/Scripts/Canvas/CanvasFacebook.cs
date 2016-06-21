@@ -23,6 +23,7 @@ namespace Facebook.Unity.Canvas
     using System;
     using System.Collections.Generic;
     using System.Globalization;
+    using System.IO;
 
     internal sealed class CanvasFacebook : FacebookBase, ICanvasFacebookImplementation
     {
@@ -35,6 +36,7 @@ namespace Facebook.Unity.Canvas
         internal const string FacebookConnectURL = "https://connect.facebook.net";
 
         private const string AuthResponseKey = "authResponse";
+        private const string ResponseKey = "response";
 
         private string appId;
         private string appLinkUrl;
@@ -108,7 +110,7 @@ namespace Facebook.Unity.Canvas
                 string channelUrl,
                 string authResponse,
                 bool frictionlessRequests,
-                string javascriptSDKLocale,
+                string jsSDKLocale,
                 HideUnityDelegate hideUnityDelegate,
                 InitDelegate onInitComplete)
         {
@@ -145,7 +147,7 @@ namespace Facebook.Unity.Canvas
                 "FBUnity.init",
                 isPlayer ? 1 : 0,
                 FacebookConnectURL,
-                javascriptSDKLocale,
+                jsSDKLocale,
                 Constants.DebugMode ? 1 : 0,
                 parameters.ToJsonString(),
                 status ? 1 : 0);
@@ -268,16 +270,18 @@ namespace Facebook.Unity.Canvas
             string testCurrency,
             FacebookDelegate<IPayResult> callback)
         {
-            this.PayImpl(
-                 product,
-                 action,
-                 quantity,
-                 quantityMin,
-                 quantityMax,
-                 requestId,
-                 pricepointId,
-                 testCurrency,
-                 callback);
+            MethodArguments args = new MethodArguments();
+            args.AddString("product", product);
+            args.AddString("action", action);
+            args.AddPrimative("quantity", quantity);
+            args.AddNullablePrimitive("quantity_min", quantityMin);
+            args.AddNullablePrimitive("quantity_max", quantityMax);
+            args.AddString("request_id", requestId);
+            args.AddString("pricepoint_id", pricepointId);
+            args.AddString("test_currency", testCurrency);
+            var call = new CanvasUIMethodCall<IPayResult>(this, MethodPay, Constants.OnPayCompleteMethodName);
+            call.Callback = callback;
+            call.Call(args);
         }
 
         public override void GameGroupCreate(
@@ -316,7 +320,7 @@ namespace Facebook.Unity.Canvas
                     "url", this.appLinkUrl
                 }
             };
-            callback(new AppLinkResult(new ResultContainer(result)));
+            callback(new AppLinkResult(MiniJSON.Json.Serialize(result)));
             this.appLinkUrl = string.Empty;
         }
 
@@ -344,17 +348,13 @@ namespace Facebook.Unity.Canvas
                 MiniJSON.Json.Serialize(parameters));
         }
 
-        public override void OnLoginComplete(ResultContainer result)
+        public override void OnLoginComplete(string responseJsonData)
         {
-            CanvasFacebook.FormatAuthResponse(
-                result,
-                (formattedResponse) =>
-                    {
-                        this.OnAuthResponse(new LoginResult(formattedResponse));
-                    });
+            string formattedResponse = CanvasFacebook.FormatAuthResponse(responseJsonData);
+            this.OnAuthResponse(new LoginResult(formattedResponse));
         }
 
-        public override void OnGetAppLinkComplete(ResultContainer message)
+        public override void OnGetAppLinkComplete(string message)
         {
             // We should never get here on canvas. We store the app link on this object
             // so should never hit this method.
@@ -364,52 +364,43 @@ namespace Facebook.Unity.Canvas
         // used only to refresh the access token
         public void OnFacebookAuthResponseChange(string responseJsonData)
         {
-            this.OnFacebookAuthResponseChange(new ResultContainer(responseJsonData));
-        }
-
-        public void OnFacebookAuthResponseChange(ResultContainer resultContainer)
-        {
-            CanvasFacebook.FormatAuthResponse(
-                resultContainer,
-                (formattedResponse) =>
-                {
-                    var result = new LoginResult(formattedResponse);
-                    AccessToken.CurrentAccessToken = result.AccessToken;
-                });
+            string formattedResponse = CanvasFacebook.FormatAuthResponse(responseJsonData);
+            var result = new LoginResult(formattedResponse);
+            AccessToken.CurrentAccessToken = result.AccessToken;
         }
 
         public void OnPayComplete(string responseJsonData)
         {
-            this.OnPayComplete(new ResultContainer(responseJsonData));
-        }
-
-        public void OnPayComplete(ResultContainer resultContainer)
-        {
-            var result = new PayResult(resultContainer);
+            string formattedResponse = CanvasFacebook.FormatResult(responseJsonData);
+            var result = new PayResult(formattedResponse);
             CallbackManager.OnFacebookResponse(result);
         }
 
-        public override void OnAppRequestsComplete(ResultContainer resultContainer)
+        public override void OnAppRequestsComplete(string responseJsonData)
         {
-            var result = new AppRequestResult(resultContainer);
+            string formattedResponse = CanvasFacebook.FormatResult(responseJsonData);
+            var result = new AppRequestResult(formattedResponse);
             CallbackManager.OnFacebookResponse(result);
         }
 
-        public override void OnShareLinkComplete(ResultContainer resultContainer)
+        public override void OnShareLinkComplete(string responseJsonData)
         {
-            var result = new ShareResult(resultContainer);
+            string formattedResponse = CanvasFacebook.FormatResult(responseJsonData);
+            var result = new ShareResult(formattedResponse);
             CallbackManager.OnFacebookResponse(result);
         }
 
-        public override void OnGroupCreateComplete(ResultContainer resultContainer)
+        public override void OnGroupCreateComplete(string responseJsonData)
         {
-            var result = new GroupCreateResult(resultContainer);
+            string formattedResponse = CanvasFacebook.FormatResult(responseJsonData);
+            var result = new GroupCreateResult(formattedResponse);
             CallbackManager.OnFacebookResponse(result);
         }
 
-        public override void OnGroupJoinComplete(ResultContainer resultContainer)
+        public override void OnGroupJoinComplete(string responseJsonData)
         {
-            var result = new GroupJoinResult(resultContainer);
+            string formattedResponse = CanvasFacebook.FormatResult(responseJsonData);
+            var result = new GroupJoinResult(formattedResponse);
             CallbackManager.OnFacebookResponse(result);
         }
 
@@ -418,120 +409,55 @@ namespace Facebook.Unity.Canvas
             this.appLinkUrl = url;
         }
 
-        private static void FormatAuthResponse(ResultContainer result, Utilities.Callback<ResultContainer> callback)
+        private static string FormatAuthResponse(string result)
         {
-            if (result.ResultDictionary == null)
+            if (string.IsNullOrEmpty(result))
             {
-                callback(result);
-                return;
+                return result;
             }
 
+            IDictionary<string, object> responseDictionary = GetFormattedResponseDictionary(result);
             IDictionary<string, object> authResponse;
-            if (result.ResultDictionary.TryGetValue(CanvasFacebook.AuthResponseKey, out authResponse))
+            if (responseDictionary.TryGetValue(CanvasFacebook.AuthResponseKey, out authResponse))
             {
-                result.ResultDictionary.Remove(CanvasFacebook.AuthResponseKey);
+                responseDictionary.Remove(CanvasFacebook.AuthResponseKey);
                 foreach (var item in authResponse)
                 {
-                    result.ResultDictionary[item.Key] = item.Value;
+                    responseDictionary[item.Key] = item.Value;
                 }
             }
 
-            // The JS SDK doesn't always store the permissions so request them before returning the results
-            if (result.ResultDictionary.ContainsKey(LoginResult.AccessTokenKey)
-                && !result.ResultDictionary.ContainsKey(LoginResult.PermissionsKey))
-            {
-                var parameters = new Dictionary<string, string>()
-                {
-                    {"fields", "permissions"},
-                    {Constants.AccessTokenKey, (string) result.ResultDictionary[LoginResult.AccessTokenKey]},
-                };
-                FacebookDelegate<IGraphResult> apiCallback = (IGraphResult r) => {
-                    IDictionary<string, object> permissionsJson;
-                    if (r.ResultDictionary != null && r.ResultDictionary.TryGetValue("permissions", out permissionsJson))
-                    {
-                        IList<string> permissions = new List<string>();
-                        IList<object> data;
-                        if (permissionsJson.TryGetValue("data", out data))
-                        {
-                            foreach (var permission in data)
-                            {
-                                var permissionDictionary = permission as IDictionary<string, object>;
-                                if (permissionDictionary != null)
-                                {
-                                    string status;
-                                    if (permissionDictionary.TryGetValue("status", out status)
-                                        && status.Equals("granted", StringComparison.InvariantCultureIgnoreCase))
-                                    {
-                                        string permissionName;
-                                        if (permissionDictionary.TryGetValue("permission", out permissionName))
-                                        {
-                                            permissions.Add(permissionName);
-                                        }
-                                        else
-                                        {
-                                            FacebookLogger.Warn("Didn't find permission name");
-                                        }
-                                    }
-                                    else
-                                    {
-                                        FacebookLogger.Warn("Didn't find status in permissions result");
-                                    }
-                                }
-                                else
-                                {
-                                    FacebookLogger.Warn("Failed to case permission dictionary");
-                                }
-                            }
-                        }
-                        else
-                        {
-                            FacebookLogger.Warn("Failed to extract data from permissions");
-                        }
-
-                        result.ResultDictionary[LoginResult.PermissionsKey] = permissions.ToCommaSeparateList();
-                    }
-                    else
-                    {
-                        FacebookLogger.Warn("Failed to load permissions for access token");
-                    }
-
-                    callback(result);
-                };
-                FB.API(
-                    "me",
-                    HttpMethod.GET,
-                    apiCallback,
-                    parameters);
-            }
-            else
-            {
-                callback(result);
-            }
+            return MiniJSON.Json.Serialize(responseDictionary);
         }
 
-        private void PayImpl(
-            string product,
-            string action,
-            int quantity,
-            int? quantityMin,
-            int? quantityMax,
-            string requestId,
-            string pricepointId,
-            string testCurrency,
-            FacebookDelegate<IPayResult> callback)
+        // This method converts the format of the result to match the format
+        // of our results from iOS and Android
+        private static string FormatResult(string result)
         {
-            MethodArguments args = new MethodArguments();
-            args.AddString("product", product);
-            args.AddString("action", action);
-            args.AddPrimative("quantity", quantity);
-            args.AddNullablePrimitive("quantity_min", quantityMin);
-            args.AddNullablePrimitive("quantity_max", quantityMax);
-            args.AddString("request_id", requestId);
-            args.AddString("pricepoint_id", pricepointId);
-            args.AddString("test_currency", testCurrency);
-            var call = new CanvasUIMethodCall<IPayResult>(this, MethodPay, Constants.OnPayCompleteMethodName);
-            call.Callback = callback;
-            call.Call(args);
+            if (string.IsNullOrEmpty(result))
+            {
+                return result;
+            }
+
+            return MiniJSON.Json.Serialize(GetFormattedResponseDictionary(result));
+        }
+
+        private static IDictionary<string, object> GetFormattedResponseDictionary(string result)
+        {
+            var resultDictionary = (IDictionary<string, object>)MiniJSON.Json.Deserialize(result);
+            IDictionary<string, object> responseDictionary;
+            if (resultDictionary.TryGetValue(CanvasFacebook.ResponseKey, out responseDictionary))
+            {
+                object callbackId;
+                if (resultDictionary.TryGetValue(Constants.CallbackIdKey, out callbackId))
+                {
+                    responseDictionary[Constants.CallbackIdKey] = callbackId;
+                }
+
+                return responseDictionary;
+            }
+
+            return resultDictionary;
         }
 
         private class CanvasUIMethodCall<T> : MethodCall<T> where T : IResult

@@ -287,7 +287,10 @@ namespace Facebook.Unity.Mobile.Android
 
         public override void ActivateApp(string appId)
         {
-            // Activate app is logged automatically on android.
+            MethodArguments args = new MethodArguments();
+            args.AddString("app_id", appId);
+            var activateApp = new JavaMethodCall<IResult>(this, "ActivateApp");
+            activateApp.Call(args);
         }
 
         public override void FetchDeferredAppLink(

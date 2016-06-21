@@ -1,11 +1,7 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Timers;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -39,6 +35,7 @@ public class GameController : MonoBehaviour
 
     public Sprite pauseBtnImg;
     public Sprite resumeBtnImg;
+    public Text pauseText;
 
     public AudioSource[] audios;
 
@@ -50,6 +47,9 @@ public class GameController : MonoBehaviour
     public GameObject enemyExplosion;
 
     private Button pauseBtn;
+
+    private Button facebookBtn;
+
     public static bool pause;
 
     GameObject[] tutorialGameObjects;
@@ -122,17 +122,53 @@ public class GameController : MonoBehaviour
     {
         if (pause)
         {
-            pauseBtn.GetComponentInParent<Image>().sprite = pauseBtnImg;
-            Time.timeScale = 1;
-            bgAudio.volume = 1.0f;
+            MResume();
         }
         else
+        {
+            MPause();
+        }
+    }
+
+    void MPause()
+    {
+        if (!pause)
         {
             pauseBtn.GetComponentInParent<Image>().sprite = resumeBtnImg;
             Time.timeScale = 0;
             bgAudio.volume = 0.0f;
+            pause = true;
+            pauseText.gameObject.SetActive(true);
         }
-        pause = !pause;
+    }
+
+    void MResume()
+    {
+        if (pause)
+        {
+            pauseBtn.GetComponentInParent<Image>().sprite = pauseBtnImg;
+            Time.timeScale = 1;
+            bgAudio.volume = 1.0f;
+            //rest thanks for share text
+            GameObject thank = GameObject.Find("Thank");
+            if (thank != null)
+            {
+                thank.GetComponent<Text>().text = "";
+            }
+            pause = false;
+            pauseText.gameObject.SetActive(false);
+        }
+    }
+
+    void FacebookButtonClick()
+    {
+        FacebookController.InitShare(currentLevel);
+        MPause();
+
+        //if (!pause)
+        //{
+        //    PauseButtonClick();
+        //}
     }
 
     private void UpdateNewWaveCooldown()
@@ -235,7 +271,7 @@ public class GameController : MonoBehaviour
                 StartCoroutine(DisplayLevelUpDownMessage("Great, Round up!"));
                 //add score
                 AddScore(Constants.LEVEL_UP_BONUS_SCORE);
-                GameObject scoreTextAnimation = (GameObject)Instantiate(scoreAnimationText, new Vector3(0,0,0), Quaternion.identity);
+                GameObject scoreTextAnimation = (GameObject)Instantiate(scoreAnimationText, new Vector3(0, 0, 0), Quaternion.identity);
                 scoreTextAnimation.GetComponentInChildren<TextMesh>().text = "+" + Constants.LEVEL_UP_BONUS_SCORE;
                 //audio when level up
                 levelUpAudio.Play();
@@ -335,6 +371,10 @@ public class GameController : MonoBehaviour
         pauseBtn.onClick.AddListener(PauseButtonClick);
         pause = false;
 
+        //init facebook button
+        facebookBtn = GameObject.FindGameObjectWithTag("FacebookBtn").GetComponent<Button>();
+        facebookBtn.onClick.AddListener(FacebookButtonClick);
+
         //init audio sources
         audios = GetComponents<AudioSource>();
         bgAudio = audios[0];
@@ -343,7 +383,6 @@ public class GameController : MonoBehaviour
 
         //start spawn enemy
         StartCoroutine(SpawnWave());
-
         GoogleAdsController.RequestBanner();
     }
 
@@ -364,15 +403,15 @@ public class GameController : MonoBehaviour
         Save();
     }
 
-    public void OnApplicationPause(bool pauseStatus)
-    {
-        pause = pauseStatus;
-    }
+    //public void OnApplicationPause(bool pauseStatus)
+    //{
+    //    MPause();
+    //}
 
-    public void OnApplication()
-    {
-        pause = false;
-    }
+    //public void OnApplication()
+    //{
+    //    MResume();
+    //}
 
     public void OnApplicationFocus(bool focusStatus)
     {

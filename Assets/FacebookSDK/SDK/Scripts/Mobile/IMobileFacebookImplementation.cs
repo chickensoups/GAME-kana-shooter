@@ -20,7 +20,7 @@
 
 namespace Facebook.Unity.Mobile
 {
-    internal interface IMobileFacebookImplementation : IMobileFacebook, IMobileFacebookResultHandler
+    internal interface IMobileFacebookImplementation : IMobileFacebook, IMobileFacebookCallbackHandler
     {
     }
 }

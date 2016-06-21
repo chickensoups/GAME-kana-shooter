@@ -20,11 +20,12 @@
 
 namespace Facebook.Unity
 {
+    using System;
     using System.Collections.Generic;
 
     internal class AppLinkResult : ResultBase, IAppLinkResult
     {
-        public AppLinkResult(ResultContainer resultContainer) : base(resultContainer)
+        public AppLinkResult(string result) : base(result)
         {
             if (this.ResultDictionary != null)
             {
@@ -61,19 +62,5 @@ namespace Facebook.Unity
         public string Ref { get; private set; }
 
         public IDictionary<string, object> Extras { get; private set; }
-
-        public override string ToString()
-        {
-            return Utilities.FormatToString(
-                base.ToString(),
-                this.GetType().Name,
-                new Dictionary<string, string>()
-                {
-                    { "Url", this.Url },
-                    { "TargetUrl", this.TargetUrl },
-                    { "Ref", this.Ref },
-                    { "Extras", this.Extras.ToJson() },
-                });
-        }
     }
 }

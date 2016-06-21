@@ -20,24 +20,10 @@
 
 namespace Facebook.Unity
 {
-    /// <summary>
-    /// OG action type.
-    /// </summary>
     public enum OGActionType
     {
-        /// <summary>
-        /// SEND Action.
-        /// </summary>
         SEND,
-
-        /// <summary>
-        /// ASKFOR Action.
-        /// </summary>
         ASKFOR,
-
-        /// <summary>
-        /// TURN Action.
-        /// </summary>
         TURN,
     }
 }

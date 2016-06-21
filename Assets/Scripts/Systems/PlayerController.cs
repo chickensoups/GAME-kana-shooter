@@ -1,8 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using System.Collections;
-using System.Net;
-using System.Xml.Schema;
 
 public class PlayerController : MonoBehaviour
 {
@@ -36,7 +33,6 @@ public class PlayerController : MonoBehaviour
             bolt.GetComponentInChildren<TextMesh>().text =
                 WeaponController.GetChoosenWeaponName();
             Instantiate(bolt, boltSpawn.transform.position, boltSpawn.transform.rotation);
-            //GetComponent<AudioSource>().Play();
         }
     }
 

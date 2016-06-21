@@ -20,13 +20,13 @@
 
 namespace Facebook.Unity
 {
-    using System.Collections.Generic;
+    using System.Collections;
 
     internal class GroupCreateResult : ResultBase, IGroupCreateResult
     {
         public const string IDKey = "id";
 
-        public GroupCreateResult(ResultContainer resultContainer) : base(resultContainer)
+        public GroupCreateResult(string result) : base(result)
         {
             if (this.ResultDictionary != null)
             {
@@ -39,16 +39,5 @@ namespace Facebook.Unity
         }
 
         public string GroupId { get; private set; }
-
-        public override string ToString()
-        {
-            return Utilities.FormatToString(
-                base.ToString(),
-                this.GetType().Name,
-                new Dictionary<string, string>()
-                {
-                    { "GroupId", this.GroupId },
-                });
-        }
     }
 }

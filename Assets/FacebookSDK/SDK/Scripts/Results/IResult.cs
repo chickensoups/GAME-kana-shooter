@@ -20,10 +20,11 @@
 
 namespace Facebook.Unity
 {
+    using System.Collections;
     using System.Collections.Generic;
 
     /// <summary>
-    /// A class contiaing the result data.
+    /// A result.
     /// </summary>
     public interface IResult
     {
@@ -36,7 +37,7 @@ namespace Facebook.Unity
         /// <summary>
         /// Gets the result.
         /// </summary>
-        /// <value>A collection of key values pairs that are parsed from the result.</value>
+        /// <value>A collection of key values pairs that are parsed from the result</value>
         IDictionary<string, object> ResultDictionary { get; }
 
         /// <summary>

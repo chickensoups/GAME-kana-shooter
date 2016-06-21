@@ -20,7 +20,7 @@
 
 namespace Facebook.Unity
 {
-    internal interface IFacebookImplementation : IFacebook, IFacebookResultHandler
+    internal interface IFacebookImplementation : IFacebook, IFacebookCallbackHandler
     {
     }
 }

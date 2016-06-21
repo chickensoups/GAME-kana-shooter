@@ -20,45 +20,23 @@
 
 namespace Facebook.Unity
 {
-    using System.Collections.Generic;
+    using System;
+    using System.Collections;
 
     internal class ShareResult : ResultBase, IShareResult
     {
-        internal ShareResult(ResultContainer resultContainer) : base(resultContainer)
+        internal ShareResult(string result) : base(result)
         {
             if (this.ResultDictionary != null)
             {
-                string postId;
-                if (this.ResultDictionary.TryGetValue(ShareResult.PostIDKey, out postId))
+                object postId;
+                if (this.ResultDictionary.TryGetValue("id", out postId))
                 {
-                    this.PostId = postId;
-                }
-                else if (this.ResultDictionary.TryGetValue("postId", out postId))
-                {
-                    this.PostId = postId;
+                    this.PostId = postId as string;
                 }
             }
         }
 
         public string PostId { get; private set; }
-
-        internal static string PostIDKey
-        {
-            get
-            {
-                return Constants.IsWeb ? "post_id" : "id";
-            }
-        }
-
-        public override string ToString()
-        {
-            return Utilities.FormatToString(
-                base.ToString(),
-                this.GetType().Name,
-                new Dictionary<string, string>()
-                {
-                    { "PostId", this.PostId },
-                });
-        }
     }
 }

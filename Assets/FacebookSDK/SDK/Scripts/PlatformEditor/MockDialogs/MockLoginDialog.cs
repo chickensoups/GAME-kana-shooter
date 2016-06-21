@@ -22,6 +22,7 @@ namespace Facebook.Unity.Editor.Dialogs
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using UnityEngine;
 
     internal class MockLoginDialog : EditorFacebookMockDialog
@@ -105,9 +106,9 @@ namespace Facebook.Unity.Editor.Dialogs
                     var newToken = new AccessToken(
                         this.accessToken,
                         facebookID,
-                        DateTime.UtcNow.AddDays(60),
+                        DateTime.Now.AddDays(60),
                         grantedPerms,
-                        DateTime.UtcNow);
+                        DateTime.Now);
 
                     var result = (IDictionary<string, object>)MiniJSON.Json.Deserialize(newToken.ToJson());
                     result.Add("granted_permissions", grantedPerms);
@@ -119,7 +120,7 @@ namespace Facebook.Unity.Editor.Dialogs
 
                     if (this.Callback != null)
                     {
-                        this.Callback(new ResultContainer(result));
+                        this.Callback(MiniJSON.Json.Serialize(result));
                     }
                 });
             });

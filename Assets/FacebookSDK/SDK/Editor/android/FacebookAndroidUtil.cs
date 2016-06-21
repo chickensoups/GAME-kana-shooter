@@ -20,6 +20,8 @@
 
 namespace UnityEditor.FacebookEditor
 {
+    using System;
+    using System.Collections;
     using System.Diagnostics;
     using System.Text;
     using UnityEngine;

@@ -22,7 +22,7 @@ namespace Facebook.Unity
 {
     internal class AppInviteResult : ResultBase, IAppInviteResult
     {
-        public AppInviteResult(ResultContainer resultContainer) : base(resultContainer)
+        public AppInviteResult(string result) : base(result)
         {
         }
     }

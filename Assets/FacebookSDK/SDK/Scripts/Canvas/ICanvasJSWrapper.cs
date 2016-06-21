@@ -20,6 +20,8 @@
 
 namespace Facebook.Unity.Canvas
 {
+    using System;
+
     internal interface ICanvasJSWrapper
     {
         string IntegrationMethodJs { get; }

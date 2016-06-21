@@ -20,7 +20,7 @@
 
 namespace Facebook.Unity
 {
-    internal enum FacebookUnityPlatform
+    public enum FacebookUnityPlatform
     {
         // Set when running on a platform that we don't
         // support
@@ -28,6 +28,6 @@ namespace Facebook.Unity
         Android,
         IOS,
         WebGL,
-        WebPlayer,
+        WebPlayer
     }
 }

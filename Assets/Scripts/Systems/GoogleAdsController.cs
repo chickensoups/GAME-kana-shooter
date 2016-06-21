@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-using GoogleMobileAds.Api;
-using System.Collections;
+﻿using GoogleMobileAds.Api;
 
 public class GoogleAdsController
 {

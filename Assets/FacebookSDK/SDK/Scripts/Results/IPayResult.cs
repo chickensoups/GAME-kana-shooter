@@ -21,14 +21,9 @@
 namespace Facebook.Unity
 {
     /// <summary>
-    /// The result of a pay request.
+    /// The result of a pay request
     /// </summary>
     public interface IPayResult : IResult
     {
-        /// <summary>
-        /// Gets the error code.
-        /// </summary>
-        /// <value>The error code.</value>
-        long ErrorCode { get; }
     }
 }
